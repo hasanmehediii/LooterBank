@@ -1,40 +1,49 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Loot Bank - Login / Signup</title>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="login.css" />
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Login - MH Loot Bank</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700;900&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="login.css" />
+<script defer src="show-hide-password.js"></script>
 </head>
 <body>
-  <div class="auth-container fade-in">
-    <h2 id="form-title">Welcome Back</h2>
-    <form id="auth-form">
-      <div id="fullname-group" class="input-group hidden">
-        <label for="fullname">Full Name</label>
-        <input type="text" id="fullname" name="fullname" placeholder="Your full name" />
+  <section class="auth-section">
+    <div class="auth-container animate-fade-in">
+      <h1 class="auth-title">
+        <span class="bold-lightblue">MH Loot Bank</span>
+      </h1>
+      <h2 class="auth-subtitle">
+        <span class="bold-white">Where Money Meets Trust.</span>
+      </h2>
+      <p class="auth-desc">A trusted bank to keep your savings safely and securely.</p>
+
+      <form class="auth-form" onsubmit="return false;">
+        <label for="email" class="form-label">Email</label>
+        <input id="email" type="email" placeholder="Your email" required autocomplete="username" />
+
+        <label for="password" class="form-label">Password</label>
+        <div class="password-wrapper">
+          <input id="password" type="password" placeholder="Your password" required autocomplete="current-password" />
+          <button type="button" id="togglePassword" aria-label="Toggle Password Visibility">👁️</button>
+        </div>
+
+        <a href="Home/home.html" class="btn-primary">Login</a>
+      <p class="auth-link">Don't have an account? <a href="signup.html">Sign up</a></p>
+    </div>
+    <div class="auth-image-section">
+      <div class="auth-image animate-fade-in-delay"></div>
+      <p class="bank-info">
+        MH Loot Bank is committed to delivering trustworthy and innovative banking solutions to help you secure your future.
+      </p>
+      <div class="social-icons">
+        <a href="#" aria-label="Facebook" class="social-link">📘</a>
+        <a href="#" aria-label="Twitter" class="social-link">🐦</a>
+        <a href="#" aria-label="Instagram" class="social-link">📸</a>
+        <a href="#" aria-label="LinkedIn" class="social-link">🔗</a>
       </div>
-
-      <div class="input-group">
-        <label for="email">Email Address</label>
-        <input type="email" id="email" name="email" placeholder="example@mail.com" required />
-      </div>
-
-      <div class="input-group">
-        <label for="password">Password</label>
-        <input type="password" id="password" name="password" placeholder="Enter password" required minlength="6" />
-      </div>
-
-      <button type="submit" class="submit-btn">Login</button>
-    </form>
-
-    <p class="toggle-text">
-      Don't have an account?
-      <button id="toggle-btn" type="button">Sign Up</button>
-    </p>
-  </div>
-
-  <script src="login.js"></script>
+    </div>
+  </section>
 </body>
 </html>
