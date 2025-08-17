@@ -1,0 +1,545 @@
+/* General Styles */
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  /* General Styles */
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  background: linear-gradient(135deg, #0a0a2a, #2a0a2a, #4a0a4a);
+  min-height: 100vh;
+  color: #fff;
+}
+
+.welcome-page {
+  overflow-x: hidden;
+}
+
+/* Glassmorphic Navbar */
+.glassmorphic-nav {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+  padding: 1rem 0;
+  border-radius: 15px; /* Rounded corners for navbar */
+  margin: 10px; /* Add some margin to make it float */
+}
+
+.glassmorphic-nav .navbar-brand {
+  color: #fff;
+  font-weight: bold;
+  font-size: 1.5rem;
+}
+
+.glassmorphic-nav .nav-link {
+  color: #fff;
+  margin: 0 15px;
+  position: relative;
+}
+
+.glassmorphic-nav .nav-link::after {
+  content: '';
+  position: absolute;
+  width: 0;
+  height: 2px;
+  bottom: -5px;
+  left: 0;
+  background-color: #00f2fe; /* Accent color */
+  transition: width 0.3s ease-in-out;
+}
+
+.glassmorphic-nav .nav-link:hover::after {
+  width: 100%;
+}
+
+.glassmorphic-nav .btn-outline-light {
+  border-color: rgba(255, 255, 255, 0.5);
+  color: #fff;
+  transition: all 0.3s ease;
+  border-radius: 25px; /* Rounded corners for buttons */
+}
+
+.glassmorphic-nav .btn-outline-light:hover {
+  background-color: rgba(255, 255, 255, 0.2);
+  color: #fff;
+}
+
+/* Gradient Button */
+.gradient-button {
+  background: linear-gradient(45deg, #00f2fe, #4facfe);
+  border: none;
+  color: #fff;
+  font-weight: bold;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+  border-radius: 25px; /* Rounded corners for buttons */
+}
+
+.gradient-button::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(45deg, #4facfe, #00f2fe);
+  z-index: -1;
+  transition: transform 0.5s ease;
+  transform: scaleX(0);
+  transform-origin: right;
+}
+
+.gradient-button:hover::before {
+  transform: scaleX(1);
+  transform-origin: left;
+}
+
+.gradient-button:hover {
+  box-shadow: 0 0 25px rgba(0, 242, 254, 0.8), 0 0 40px rgba(74, 172, 254, 0.6); /* More pronounced glow */
+  animation: pulse-glow 1.5s infinite alternate; /* Pulsing glow effect */
+}
+
+@keyframes pulse-glow {
+  from {
+    box-shadow: 0 0 25px rgba(0, 242, 254, 0.8), 0 0 40px rgba(74, 172, 254, 0.6);
+  }
+  to {
+    box-shadow: 0 0 35px rgba(0, 242, 254, 1), 0 0 50px rgba(74, 172, 254, 0.8);
+  }
+}
+
+/* Hero Section */
+.hero-section {
+  min-height: 80vh;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: left;
+  padding: 50px 0;
+  background: linear-gradient(135deg, #0a0a2a, #2a0a2a, #4a0a4a); /* Ensure background for patterns */
+}
+
+.hero-section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: 
+    radial-gradient(circle at 10% 20%, rgba(76, 175, 254, 0.3) 0%, transparent 50%),
+    radial-gradient(circle at 90% 80%, rgba(255, 0, 255, 0.3) 0%, transparent 50%),
+    url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><circle cx="50" cy="50" r="40" fill="none" stroke="rgba(255,255,255,0.05)" stroke-width="1"/></svg>'); /* Subtle circular pattern */
+  background-size: cover, cover, 20px 20px; /* Adjust pattern size */
+  z-index: -1;
+  opacity: 0.8;
+}
+
+.hero-section h1 {
+  font-size: 3.8rem; /* Slightly larger font */
+  line-height: 1.2;
+  font-weight: 700; /* Bold headline */
+}
+
+.hero-section .highlight-text {
+  background: linear-gradient(45deg, #00f2fe, #4facfe);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-weight: 900; /* Extra bold for highlighted text */
+}
+
+.hero-section p {
+  font-size: 1.3rem; /* Slightly larger subheadline */
+  opacity: 0.9;
+}
+
+.floating-card,
+.floating-coin {
+  position: absolute;
+  animation: float 3s ease-in-out infinite alternate, pulse-glow 2s infinite alternate;
+  backdrop-filter: blur(5px); /* Subtle glassmorphism behind them */
+  border-radius: 15px; /* For a softer look */
+  box-shadow: 0 0 30px rgba(0, 242, 254, 0.5); /* Initial glow */
+}
+
+.floating-card {
+  top: 20%;
+  left: 10%;
+  width: 60%;
+  max-width: 400px;
+  transform: rotate(15deg); /* Angled as in the sample */
+}
+
+.floating-coin {
+  bottom: 10%;
+  right: 15%;
+  width: 30%;
+  max-width: 150px;
+  animation-delay: 0.5s;
+}
+
+@keyframes float {
+  0% { transform: translateY(0px) rotate(15deg); }
+  100% { transform: translateY(-20px) rotate(15deg); }
+}
+
+@keyframes pulse-glow {
+  0% { box-shadow: 0 0 30px rgba(0, 242, 254, 0.5); }
+  100% { box-shadow: 0 0 50px rgba(0, 242, 254, 0.8); }
+}
+
+/* Stats Section */
+.stats-section {
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(5px);
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 40px 0;
+}
+
+.stat-card {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  border-radius: 10px; /* Rounded corners for stat cards */
+}
+
+.stat-card:hover {
+  transform: translateY(-10px); /* More pronounced lift */
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.4); /* Stronger shadow */
+}
+
+.stat-card h3 {
+  font-size: 2.8rem; /* Larger stat numbers */
+  font-weight: 800; /* Bolder stat numbers */
+  background: linear-gradient(45deg, #00f2fe, #4facfe);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.stat-card p {
+  font-size: 1.1rem; /* Slightly larger stat descriptions */
+  opacity: 0.9;
+}
+
+.learn-more-link {
+  color: #00f2fe;
+  text-decoration: none;
+  font-weight: bold;
+  transition: color 0.3s ease;
+}
+
+.learn-more-link:hover {
+  color: #4facfe;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 992px) {
+  .hero-section h1 {
+    font-size: 2.8rem; /* Adjusted for smaller screens */
+  }
+
+  .hero-section p {
+    font-size: 1.1rem; /* Adjusted for smaller screens */
+  }
+
+  .floating-card,
+  .floating-coin {
+    position: static;
+    transform: none;
+    margin: 20px auto;
+    display: block;
+  }
+
+  .floating-card {
+    width: 80%;
+  }
+
+  .floating-coin {
+    width: 40%;
+  }
+
+  .hero-section .d-flex {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .hero-section .btn {
+    width: 80%;
+    margin-bottom: 15px;
+  }
+}
+
+@media (max-width: 768px) {
+  .glassmorphic-nav .navbar-nav .nav-item {
+    margin: 5px 0;
+  }
+
+  .stats-section .col-md-3 {
+    flex: 0 0 100%;
+    max-width: 100%;
+  }
+}
+
+}
+
+.welcome-page {
+  overflow-x: hidden;
+}
+
+/* Glassmorphic Navbar */
+.glassmorphic-nav {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+  padding: 1rem 0;
+}
+
+.glassmorphic-nav .navbar-brand {
+  color: #fff;
+  font-weight: bold;
+  font-size: 1.5rem;
+}
+
+.glassmorphic-nav .nav-link {
+  color: #fff;
+  margin: 0 15px;
+  position: relative;
+}
+
+.glassmorphic-nav .nav-link::after {
+  content: '';
+  position: absolute;
+  width: 0;
+  height: 2px;
+  bottom: -5px;
+  left: 0;
+  background-color: #00f2fe; /* Accent color */
+  transition: width 0.3s ease-in-out;
+}
+
+.glassmorphic-nav .nav-link:hover::after {
+  width: 100%;
+}
+
+.glassmorphic-nav .btn-outline-light {
+  border-color: rgba(255, 255, 255, 0.5);
+  color: #fff;
+  transition: all 0.3s ease;
+}
+
+.glassmorphic-nav .btn-outline-light:hover {
+  background-color: rgba(255, 255, 255, 0.2);
+  color: #fff;
+}
+
+/* Gradient Button */
+.gradient-button {
+  background: linear-gradient(45deg, #00f2fe, #4facfe);
+  border: none;
+  color: #fff;
+  font-weight: bold;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+}
+
+.gradient-button::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(45deg, #4facfe, #00f2fe);
+  z-index: -1;
+  transition: transform 0.5s ease;
+  transform: scaleX(0);
+  transform-origin: right;
+}
+
+.gradient-button:hover::before {
+  transform: scaleX(1);
+  transform-origin: left;
+}
+
+.gradient-button:hover {
+  box-shadow: 0 0 15px rgba(0, 242, 254, 0.6);
+}
+
+/* Hero Section */
+.hero-section {
+  min-height: 80vh;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: left;
+  padding: 50px 0;
+}
+
+.hero-section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle at 10% 20%, rgba(76, 175, 254, 0.2) 0%, transparent 50%),
+              radial-gradient(circle at 90% 80%, rgba(255, 0, 255, 0.2) 0%, transparent 50%),
+              url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><circle cx="50" cy="50" r="40" fill="none" stroke="rgba(255,255,255,0.05)" stroke-width="2"/></svg>'); /* Subtle geometric pattern */
+  background-size: cover, cover, 50px 50px;
+  z-index: -1;
+  opacity: 0.7;
+}
+
+.hero-section h1 {
+  font-size: 3.5rem;
+  line-height: 1.2;
+}
+
+.hero-section .highlight-text {
+  background: linear-gradient(45deg, #00f2fe, #4facfe);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.hero-section p {
+  font-size: 1.2rem;
+  opacity: 0.8;
+}
+
+.floating-card,
+.floating-coin {
+  position: absolute;
+  animation: float 3s ease-in-out infinite alternate, pulse-glow 2s infinite alternate;
+  backdrop-filter: blur(5px); /* Subtle glassmorphism behind them */
+  border-radius: 15px; /* For a softer look */
+  box-shadow: 0 0 30px rgba(0, 242, 254, 0.5); /* Initial glow */
+}
+
+.floating-card {
+  top: 20%;
+  left: 10%;
+  width: 60%;
+  max-width: 400px;
+  transform: rotate(15deg); /* Angled as in the sample */
+}
+
+.floating-coin {
+  bottom: 10%;
+  right: 15%;
+  width: 30%;
+  max-width: 150px;
+  animation-delay: 0.5s;
+}
+
+@keyframes float {
+  0% { transform: translateY(0px) rotate(15deg); }
+  100% { transform: translateY(-20px) rotate(15deg); }
+}
+
+@keyframes pulse-glow {
+  0% { box-shadow: 0 0 30px rgba(0, 242, 254, 0.5); }
+  100% { box-shadow: 0 0 50px rgba(0, 242, 254, 0.8); }
+}
+
+/* Stats Section */
+.stats-section {
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(5px);
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 40px 0;
+}
+
+.stat-card {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.stat-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+}
+
+.stat-card h3 {
+  font-size: 2.5rem;
+  font-weight: bold;
+  background: linear-gradient(45deg, #00f2fe, #4facfe);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.stat-card p {
+  font-size: 1rem;
+  opacity: 0.9;
+}
+
+.learn-more-link {
+  color: #00f2fe;
+  text-decoration: none;
+  font-weight: bold;
+  transition: color 0.3s ease;
+}
+
+.learn-more-link:hover {
+  color: #4facfe;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 992px) {
+  .hero-section h1 {
+    font-size: 2.5rem;
+  }
+
+  .hero-section p {
+    font-size: 1rem;
+  }
+
+  .floating-card,
+  .floating-coin {
+    position: static;
+    transform: none;
+    margin: 20px auto;
+    display: block;
+  }
+
+  .floating-card {
+    width: 80%;
+  }
+
+  .floating-coin {
+    width: 40%;
+  }
+
+  .hero-section .d-flex {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .hero-section .btn {
+    width: 80%;
+    margin-bottom: 15px;
+  }
+}
+
+@media (max-width: 768px) {
+  .glassmorphic-nav .navbar-nav .nav-item {
+    margin: 5px 0;
+  }
+
+  .stats-section .col-md-3 {
+    flex: 0 0 100%;
+    max-width: 100%;
+  }
+}

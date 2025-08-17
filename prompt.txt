@@ -1,0 +1,104 @@
+Deep Prompt for Generating a "Crypto Bank" Hero Webpage with React JS
+Create a visually stunning "Crypto Bank" hero section webpage in React JS inspired by the attached Astrobank design. The website should capture the following elements, styles, and UI concepts:
+
+Features & Sections
+Navigation Bar at the top:
+
+Dark, glassmorphic background.
+
+Logo on the left.
+
+Menu items: Cards, Services, Business, Features, FAQ.
+
+CTA buttons: "Sign in" and "Get Started" on the right.
+
+Rounded corners and elegant hover states.
+
+Hero Section:
+
+Large, bold headline: "Pay, invest money & save you money with a single bank".
+
+Highlighted/inset color for keywords like "single bank".
+
+Subheadline: "Extract your money without commissions anywhere in the world".
+
+Two prominent buttons: "Get started" (gradient background, glowing effect) and "Learn more" (transparent or subtle outline).
+
+Background gradient with deep blue, purple, and magenta hues, subtle geometric patterns or circular digital effects.
+
+Visuals:
+
+Floating crypto debit card mockup with bank logo and details, angled as in the sample.
+
+Hand holding a crypto coin (Ethereum or similar), illuminated with neon/purple glow.
+
+Subtle blur/glassmorphism effect behind card and coin.
+
+3D or subtle animated icons.
+
+Statistics Section:
+
+Four stat cards in a horizontal row:
+
+0% Commissions
+
+12% Cashback
+
+54% Customers
+
+9.3b Investments
+
+Each stat in a colored card with soft drop shadow, rounded corners, minimal icons.
+
+Interactive "Learn more" links under each stat.
+
+Design & Visual Style
+Color Palette:
+
+Gradients: midnight blue → purple → magenta.
+
+Accent neon/sky blue, pink highlights.
+
+Glassmorphism panels with frosted glass effect.
+
+Card and button glow on hover.
+
+Typography:
+
+Modern, geometric sans-serif font.
+
+Bold headline, regular for stats, buttons with medium font weight.
+
+Large font sizes for hero, stats, and CTA elements.
+
+Assets:
+
+Custom SVG for bank card.
+
+Crypto coin illustration.
+
+Futuristic icons for features.
+
+Responsiveness:
+
+Fully mobile-friendly: navbar converts to hamburger, stat cards stack vertically, buttons centered.
+
+Technologies
+React JS (functional components, hooks)
+
+Styled Components or Tailwind CSS for gradients, glassmorphism, and responsive layout
+
+Framer Motion or React Spring for smooth animation of hero visuals (card/coin)
+
+SVGs for custom icons/cards
+
+React Router (for navigation bar logic if multi-page)
+
+User Experience
+Highlight feeling of trust, innovation, and unlimited access.
+
+Microinteractions: hover/click on buttons, card tilt effect, pulsing glow.
+
+Fast performance, smooth transitions.
+
+Goal: Produce a React JS hero section and stat feature row, closely matching the attached design, emphasizing crypto bank innovation, trust, and visual impact with glassmorphism, glowing gradients, and interactive UI elements.
