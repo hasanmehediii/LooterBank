@@ -1,0 +1,162 @@
+[
+  {
+    "name": "John Doe",
+    "email": "john.doe@example.com",
+    "passwordHash": "$2b$10$fakedhash",
+    "roles": [
+      "user"
+    ],
+    "status": "active",
+    "mfaEnabled": false,
+    "lastLogin": "2025-09-01T12:00:00Z",
+    "profile": {
+      "phone": "111-222-3333",
+      "address": "123 Main St, Anytown, USA",
+      "dob": "1990-01-15"
+    }
+  },
+  {
+    "name": "Jane Smith",
+    "email": "jane.smith@example.com",
+    "passwordHash": "$2b$10$fakedhash",
+    "roles": [
+      "user",
+      "admin"
+    ],
+    "status": "active",
+    "mfaEnabled": true,
+    "lastLogin": "2025-09-05T10:30:00Z",
+    "profile": {
+      "phone": "444-555-6666",
+      "address": "456 Oak Ave, Otherville, USA",
+      "dob": "1988-05-20"
+    }
+  },
+  {
+    "name": "Peter Jones",
+    "email": "peter.jones@example.com",
+    "passwordHash": "$2b$10$fakedhash",
+    "roles": [
+      "user"
+    ],
+    "status": "inactive",
+    "mfaEnabled": false,
+    "profile": {
+      "phone": "777-888-9999",
+      "address": "789 Pine Ln, Sometown, USA",
+      "dob": "1995-11-30"
+    }
+  },
+  {
+    "name": "Mary Williams",
+    "email": "mary.williams@example.com",
+    "passwordHash": "$2b$10$fakedhash",
+    "roles": [
+      "user"
+    ],
+    "status": "active",
+    "mfaEnabled": true,
+    "lastLogin": "2025-09-04T18:45:00Z",
+    "profile": {
+      "phone": "123-456-7890",
+      "address": "321 Elm St, Yourtown, USA",
+      "dob": "1992-03-25"
+    }
+  },
+  {
+    "name": "David Brown",
+    "email": "david.brown@example.com",
+    "passwordHash": "$2b$10$fakedhash",
+    "roles": [
+      "user"
+    ],
+    "status": "active",
+    "mfaEnabled": false,
+    "lastLogin": "2025-09-03T14:00:00Z",
+    "profile": {
+      "phone": "098-765-4321",
+      "address": "654 Maple Dr, Anotherton, USA",
+      "dob": "1985-07-10"
+    }
+  },
+  {
+    "name": "Susan Garcia",
+    "email": "susan.garcia@example.com",
+    "passwordHash": "$2b$10$fakedhash",
+    "roles": [
+      "user"
+    ],
+    "status": "active",
+    "mfaEnabled": true,
+    "lastLogin": "2025-09-05T09:00:00Z",
+    "profile": {
+      "phone": "112-233-4455",
+      "address": "987 Birch Ct, Somewhere, USA",
+      "dob": "1998-12-05"
+    }
+  },
+  {
+    "name": "Michael Miller",
+    "email": "michael.miller@example.com",
+    "passwordHash": "$2b$10$fakedhash",
+    "roles": [
+      "user"
+    ],
+    "status": "active",
+    "mfaEnabled": false,
+    "lastLogin": "2025-09-02T11:20:00Z",
+    "profile": {
+      "phone": "556-677-8899",
+      "address": "159 Cedar Rd, Elsewhere, USA",
+      "dob": "1991-09-15"
+    }
+  },
+  {
+    "name": "Linda Davis",
+    "email": "linda.davis@example.com",
+    "passwordHash": "$2b$10$fakedhash",
+    "roles": [
+      "user"
+    ],
+    "status": "active",
+    "mfaEnabled": true,
+    "lastLogin": "2025-09-04T22:10:00Z",
+    "profile": {
+      "phone": "998-877-6655",
+      "address": "753 Spruce Ave, Nowhere, USA",
+      "dob": "1989-04-22"
+    }
+  },
+  {
+    "name": "Robert Rodriguez",
+    "email": "robert.rodriguez@example.com",
+    "passwordHash": "$2b$10$fakedhash",
+    "roles": [
+      "user"
+    ],
+    "status": "active",
+    "mfaEnabled": false,
+    "lastLogin": "2025-09-01T15:05:00Z",
+    "profile": {
+      "phone": "334-455-6677",
+      "address": "852 Walnut St, Here, USA",
+      "dob": "1993-08-18"
+    }
+  },
+  {
+    "name": "Patricia Martinez",
+    "email": "patricia.martinez@example.com",
+    "passwordHash": "$2b$10$fakedhash",
+    "roles": [
+      "user"
+    ],
+    "status": "active",
+    "mfaEnabled": true,
+    "lastLogin": "2025-09-05T11:45:00Z",
+    "profile": {
+      "phone": "778-899-0011",
+      "address": "951 Cherry Ln, There, USA",
+      "dob": "1996-10-28"
+    }
+  }
+]

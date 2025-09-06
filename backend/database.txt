@@ -1,0 +1,72 @@
+accounts:
+{
+  "_id": { "$oid": "68bc1547bee4fe9c0fd6c972" },
+  "userIds": ["ObjectId_user1", "ObjectId_user2"],
+  "accountNumber": "CHK-00123456789",
+  "accountType": "checking",
+  "balance": { "$numberDouble": "2500.75" },
+  "currency": "USD",
+  "status": "open",
+  "overdraftLimit": { "$numberInt": "500" },
+  "flags": ["vip_client"],
+  "createdAt": "2025-01-01T10:05:00Z",
+  "updatedAt": "2025-09-01T12:30:00Z"
+}
+
+
+activity_log:
+{
+  "_id": { "$oid": "68bc1591bee4fe9c0fd6c973" },
+  "userId": "ObjectId_user",
+  "action": "account.update_status",
+  "resourceType": "account",
+  "resourceId": "ObjectId_account",
+  "details": {
+    "oldStatus": "open",
+    "newStatus": "frozen",
+    "reason": "Suspicious activity detected"
+  },
+  "ip": "192.168.1.55",
+  "device": "Chrome Desktop",
+  "timestamp": "2025-09-01T14:45:00Z"
+}
+
+
+transactions:
+{
+  "_id": { "$oid": "68bc15bdbee4fe9c0fd6c974" },
+  "accountId": "ObjectId_account",
+  "type": "credit",
+  "amount": { "$numberInt": "1000" },
+  "currency": "USD",
+  "description": "Salary deposit for August",
+  "transactionDate": "2025-08-31T09:00:00Z",
+  "status": "completed",
+  "initiatedBy": "ObjectId_user",
+  "relatedTransactionId": null,
+  "metadata": {
+    "ip": "192.168.1.100",
+    "device": "iOS Safari"
+  },
+  "createdAt": "2025-08-31T09:00:00Z"
+}
+
+
+user:
+{
+  "_id": { "$oid": "68bc15dbbee4fe9c0fd6c975" },
+  "name": "Alice Johnson",
+  "email": "alice.johnson@example.com",
+  "passwordHash": "$2b$10$...",
+  "roles": ["user"],
+  "status": "active",
+  "mfaEnabled": true,
+  "lastLogin": "2025-08-25T10:15:00Z",
+  "profile": {
+    "phone": "+1234567890",
+    "address": "123 Elm St, NYC",
+    "dob": "1985-06-10"
+  },
+  "createdAt": "2025-01-01T10:00:00Z",
+  "updatedAt": "2025-09-01T12:00:00Z"
+}
