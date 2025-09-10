@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import axios from 'axios';
+import { Link } from 'react-router-dom';
 
 const LoginContainer = styled.div`
   display: flex;
@@ -42,6 +43,20 @@ const Button = styled.button`
 
   &:hover {
     background-color: #0056b3;
+  }
+`;
+
+const SignUpLink = styled.p`
+  text-align: center;
+  margin-top: 1rem;
+
+  a {
+    color: #007bff;
+    text-decoration: none;
+
+    &:hover {
+      text-decoration: underline;
+    }
   }
 `;
 
@@ -103,6 +118,9 @@ const Login = () => {
           required
         />
         <Button type="submit">Login</Button>
+        <SignUpLink>
+          Don't have an account? <Link to="/signup">Sign Up</Link>
+        </SignUpLink>
       </LoginForm>
     </LoginContainer>
   );

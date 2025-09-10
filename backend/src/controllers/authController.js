@@ -4,7 +4,7 @@ const User = require('../models/userModel');
 
 // Register User
 exports.registerUser = async (req, res) => {
-  const { name, email, password } = req.body;
+  const { name, email, password, phone, address, dob } = req.body;
 
   try {
     // Check if user exists
@@ -18,6 +18,13 @@ exports.registerUser = async (req, res) => {
       name,
       email,
       passwordHash: password, // Will be hashed below
+      roles: ['user'],
+      status: 'active',
+      profile: {
+        phone,
+        address,
+        dob,
+      },
     });
 
     // Hash password

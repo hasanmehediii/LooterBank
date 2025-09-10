@@ -1,12 +1,14 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 const SignUpContainer = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
   height: calc(100vh - 140px);
+  padding-top: 140px;
 `;
 
 const SignUpForm = styled.form`
@@ -14,14 +16,16 @@ const SignUpForm = styled.form`
   padding: 2rem;
   border-radius: 10px;
   color: white;
-  width: 300px;
-  display: flex;
-  flex-direction: column;
+  width: 600px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-gap: 1rem;
 `;
 
 const Title = styled.h2`
   text-align: center;
   margin-bottom: 1.5rem;
+  grid-column: 1 / -1;
 `;
 
 const Input = styled.input`
@@ -29,6 +33,7 @@ const Input = styled.input`
   margin-bottom: 1rem;
   border: 1px solid #ccc;
   border-radius: 5px;
+  width: 100%;
 `;
 
 const Button = styled.button`
@@ -39,10 +44,17 @@ const Button = styled.button`
   border-radius: 5px;
   cursor: pointer;
   font-size: 1rem;
+  grid-column: 1 / -1;
 
   &:hover {
     background-color: #0056b3;
   }
+`;
+
+const ErrorMessage = styled.p`
+  color: red;
+  text-align: center;
+  grid-column: 1 / -1;
 `;
 
 const SignUp = () => {
@@ -51,9 +63,14 @@ const SignUp = () => {
     email: '',
     password: '',
     password2: '',
+    phone: '',
+    address: '',
+    dob: '',
   });
+  const [error, setError] = useState('');
+  const navigate = useNavigate();
 
-  const { name, email, password, password2 } = formData;
+  const { name, email, password, password2, phone, address, dob } = formData;
 
   const onChange = (e) =>
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -61,12 +78,15 @@ const SignUp = () => {
   const onSubmit = async (e) => {
     e.preventDefault();
     if (password !== password2) {
-      console.log('Passwords do not match');
+      setError('Passwords do not match');
     } else {
       const newUser = {
         name,
         email,
         password,
+        phone,
+        address,
+        dob,
       };
 
       try {
@@ -81,8 +101,10 @@ const SignUp = () => {
         const res = await axios.post('http://localhost:5000/api/auth/register', body, config);
 
         console.log(res.data);
+        localStorage.setItem('token', res.data.token);
+        navigate('/login');
       } catch (err) {
-        console.error(err.response.data);
+        setError(err.response.data.msg);
       }
     }
   };
@@ -91,6 +113,7 @@ const SignUp = () => {
     <SignUpContainer>
       <SignUpForm onSubmit={onSubmit}>
         <Title>Sign Up</Title>
+        {error && <ErrorMessage>{error}</ErrorMessage>}
         <Input
           type="text"
           placeholder="Name"
@@ -124,6 +147,27 @@ const SignUp = () => {
           onChange={onChange}
           minLength="6"
           required
+        />
+        <Input
+          type="text"
+          placeholder="Phone Number"
+          name="phone"
+          value={phone}
+          onChange={onChange}
+        />
+        <Input
+          type="text"
+          placeholder="Address"
+          name="address"
+          value={address}
+          onChange={onChange}
+        />
+        <Input
+          type="date"
+          placeholder="Date of Birth"
+          name="dob"
+          value={dob}
+          onChange={onChange}
         />
         <Button type="submit">Sign Up</Button>
       </SignUpForm>
