@@ -1,18 +1,20 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import axios from 'axios';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import Navbar from '../common/Navbar';
+import Footer from '../common/Footer';
 
 const LoginContainer = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  height: calc(100vh - 140px);
+  height: calc(100vh - 100px);
 `;
 
 const LoginForm = styled.form`
   background: rgba(0, 0, 0, 0.7);
-  padding: 2rem;
+  padding:2rem;
   border-radius: 10px;
   color: white;
   width: 300px;
@@ -61,6 +63,7 @@ const SignUpLink = styled.p`
 `;
 
 const Login = () => {
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     email: '',
     password: '',
@@ -89,40 +92,44 @@ const Login = () => {
 
       const res = await axios.post('http://localhost:5000/api/auth/login', body, config);
 
-      console.log(res.data); // Token
-      // You would typically store the token in localStorage and redirect the user
+      localStorage.setItem('token', res.data.token);
+      navigate('/home');
     } catch (err) {
       console.error(err.response.data);
     }
   };
 
   return (
-    <LoginContainer>
-      <LoginForm onSubmit={onSubmit}>
-        <Title>Login</Title>
-        <Input
-          type="email"
-          placeholder="Email"
-          name="email"
-          value={email}
-          onChange={onChange}
-          required
-        />
-        <Input
-          type="password"
-          placeholder="Password"
-          name="password"
-          value={password}
-          onChange={onChange}
-          minLength="6"
-          required
-        />
-        <Button type="submit">Login</Button>
-        <SignUpLink>
-          Don't have an account? <Link to="/signup">Sign Up</Link>
-        </SignUpLink>
-      </LoginForm>
-    </LoginContainer>
+    <>
+      <Navbar />
+      <LoginContainer>
+        <LoginForm onSubmit={onSubmit}>
+          <Title>Login</Title>
+          <Input
+            type="email"
+            placeholder="Email"
+            name="email"
+            value={email}
+            onChange={onChange}
+            required
+          />
+          <Input
+            type="password"
+            placeholder="Password"
+            name="password"
+            value={password}
+            onChange={onChange}
+            minLength="6"
+            required
+          />
+          <Button type="submit">Login</Button>
+          <SignUpLink>
+            Don't have an account? <Link to="/signup">Sign Up</Link>
+          </SignUpLink>
+        </LoginForm>
+      </LoginContainer>
+      <Footer />
+    </>
   );
 };
 

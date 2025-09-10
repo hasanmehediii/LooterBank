@@ -1,14 +1,13 @@
 import React from 'react';
 import { Routes, Route } from 'react-router-dom';
 import styled from 'styled-components';
-import Navbar from './common/Navbar';
-import Footer from './common/Footer';
 import Welcome from './pages/Welcome';
 import Login from './auth/Login';
 import SignUp from './auth/SignUp';
 import AboutUs from './pages/AboutUs';
 import Contact from './pages/Contact';
 import FAQ from './pages/FAQ';
+import UserHome from './pages/UserHome';
 import BackgroundImage from '/images/money.jpg';
 
 const AppContainer = styled.div`
@@ -27,7 +26,6 @@ const MainContent = styled.main`
 function App() {
   return (
     <AppContainer>
-      <Navbar />
       <MainContent>
         <Routes>
           <Route path="/" element={<Welcome />} />
@@ -36,9 +34,9 @@ function App() {
           <Route path="/faq" element={<FAQ />} />
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<SignUp />} />
+          <Route path="/home" element={<UserHome />} />
         </Routes>
       </MainContent>
-      <Footer />
     </AppContainer>
   );
 }

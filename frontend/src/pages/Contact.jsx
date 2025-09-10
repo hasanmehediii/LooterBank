@@ -1,5 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
+import Navbar from '../common/Navbar';
+import Footer from '../common/Footer';
 
 const ContactContainer = styled.div`
   padding: 2rem;
@@ -13,10 +15,14 @@ const Title = styled.h1`
 
 const Contact = () => {
   return (
-    <ContactContainer>
-      <Title>Contact</Title>
-      <p>This is the Contact page.</p>
-    </ContactContainer>
+    <>
+      <Navbar />
+      <ContactContainer>
+        <Title>Contact</Title>
+        <p>This is the Contact page.</p>
+      </ContactContainer>
+      <Footer />
+    </>
   );
 };
 

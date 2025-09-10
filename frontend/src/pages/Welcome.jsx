@@ -1,5 +1,7 @@
 import React from 'react';
 import styled, { keyframes } from 'styled-components';
+import Navbar from '../common/Navbar';
+import Footer from '../common/Footer';
 
 const fadeIn = keyframes`
   from {
@@ -43,10 +45,14 @@ const Subtitle = styled.p`
 
 const Welcome = () => {
   return (
-    <WelcomeContainer>
-      <Title>LooterBank</Title>
-      <Subtitle>Your trusted partner in finance.<br /> Secure, fast, and reliable.</Subtitle>
-    </WelcomeContainer>
+    <>
+      <Navbar />
+      <WelcomeContainer>
+        <Title>LooterBank</Title>
+        <Subtitle>Your trusted partner in finance.<br /> Secure, fast, and reliable.</Subtitle>
+      </WelcomeContainer>
+      <Footer />
+    </>
   );
 };
 

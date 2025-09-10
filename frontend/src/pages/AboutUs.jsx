@@ -1,5 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
+import Navbar from '../common/Navbar';
+import Footer from '../common/Footer';
 
 const AboutUsContainer = styled.div`
   padding: 2rem;
@@ -13,10 +15,14 @@ const Title = styled.h1`
 
 const AboutUs = () => {
   return (
-    <AboutUsContainer>
-      <Title>About Us</Title>
-      <p>This is the About Us page.</p>
-    </AboutUsContainer>
+    <>
+      <Navbar />
+      <AboutUsContainer>
+        <Title>About Us</Title>
+        <p>This is the About Us page.</p>
+      </AboutUsContainer>
+      <Footer />
+    </>
   );
 };
 

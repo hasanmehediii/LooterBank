@@ -1,6 +1,7 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
+import axios from 'axios';
 
 const Nav = styled.nav`
   background: rgba(0, 0, 0, 0.5);
@@ -51,7 +52,88 @@ const Button = styled(Link)`
   }
 `;
 
+const UserMenu = styled.div`
+  position: relative;
+  cursor: pointer;
+`;
+
+const UserName = styled.span`
+  font-size: 1.2rem;
+  margin-left: 1rem;
+  padding: 0.5rem 1rem;
+  background-color: #007bff;
+  border-radius: 5px;
+
+  &:hover {
+    background-color: #0056b3;
+  }
+`;
+
+const DropdownMenu = styled.div`
+  position: absolute;
+  top: 100%;
+  right: 0;
+  background-color: #2c3e50;
+  border-radius: 5px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+  min-width: 160px;
+`;
+
+const DropdownItem = styled.div`
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+  color: white;
+
+  &:hover {
+    background-color: #34495e;
+  }
+`;
+
 const Navbar = () => {
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [userName, setUserName] = useState('');
+  const [showDropdown, setShowDropdown] = useState(false);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const fetchUserData = async () => {
+      const token = localStorage.getItem('token');
+      if (token) {
+        try {
+          const config = {
+            headers: {
+              'x-auth-token': token,
+            },
+          };
+          const res = await axios.get('http://localhost:5000/api/users/me', config);
+          setUserName(res.data.name);
+          setIsLoggedIn(true);
+        } catch (err) {
+          console.error(err);
+          localStorage.removeItem('token');
+          setIsLoggedIn(false);
+        }
+      } else {
+        setIsLoggedIn(false);
+        setUserName('');
+      }
+    };
+    fetchUserData();
+  }, []);
+
+  const handleLogout = () => {
+    localStorage.removeItem('token');
+    setIsLoggedIn(false);
+    navigate('/login');
+  };
+
+  const handleProfileClick = () => {
+    navigate('/user-profile');
+    setShowDropdown(false);
+  };
+
   return (
     <Nav>
       <Logo to="/">LooterBank</Logo>
@@ -60,7 +142,19 @@ const Navbar = () => {
         <NavLink to="/about">About Us</NavLink>
         <NavLink to="/contact">Contact</NavLink>
         <NavLink to="/faq">FAQ</NavLink>
-        <Button to="/login">Login / SignUp</Button>
+        {isLoggedIn ? (
+          <UserMenu onClick={() => setShowDropdown(!showDropdown)}>
+            <UserName>{userName}</UserName>
+            {showDropdown && (
+              <DropdownMenu>
+                <DropdownItem onClick={handleProfileClick}>User Profile</DropdownItem>
+                <DropdownItem onClick={handleLogout}>Logout</DropdownItem>
+              </DropdownMenu>
+            )}
+          </UserMenu>
+        ) : (
+          <Button to="/login">Login / SignUp</Button>
+        )}
       </div>
     </Nav>
   );

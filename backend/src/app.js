@@ -15,5 +15,6 @@ app.get('/', (req, res) => res.send('API Running'));
 
 // Define Routes
 app.use('/api/auth', require('./routes/authRoutes'));
+app.use('/api/users', require('./routes/userRoutes'));
 
 module.exports = app;

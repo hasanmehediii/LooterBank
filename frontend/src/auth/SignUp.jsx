@@ -2,13 +2,15 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import Navbar from '../common/Navbar';
+import Footer from '../common/Footer';
 
 const SignUpContainer = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  height: calc(100vh - 140px);
-  padding-top: 140px;
+  padding: 2rem 0;
+  margin-top: 4rem;
 `;
 
 const SignUpForm = styled.form`
@@ -110,68 +112,72 @@ const SignUp = () => {
   };
 
   return (
-    <SignUpContainer>
-      <SignUpForm onSubmit={onSubmit}>
-        <Title>Sign Up</Title>
-        {error && <ErrorMessage>{error}</ErrorMessage>}
-        <Input
-          type="text"
-          placeholder="Name"
-          name="name"
-          value={name}
-          onChange={onChange}
-          required
-        />
-        <Input
-          type="email"
-          placeholder="Email"
-          name="email"
-          value={email}
-          onChange={onChange}
-          required
-        />
-        <Input
-          type="password"
-          placeholder="Password"
-          name="password"
-          value={password}
-          onChange={onChange}
-          minLength="6"
-          required
-        />
-        <Input
-          type="password"
-          placeholder="Confirm Password"
-          name="password2"
-          value={password2}
-          onChange={onChange}
-          minLength="6"
-          required
-        />
-        <Input
-          type="text"
-          placeholder="Phone Number"
-          name="phone"
-          value={phone}
-          onChange={onChange}
-        />
-        <Input
-          type="text"
-          placeholder="Address"
-          name="address"
-          value={address}
-          onChange={onChange}
-        />
-        <Input
-          type="date"
-          placeholder="Date of Birth"
-          name="dob"
-          value={dob}
-          onChange={onChange}
-        />
-        <Button type="submit">Sign Up</Button>
-      </SignUpForm>
-    </SignUpContainer>
+    <>
+      <Navbar />
+      <SignUpContainer>
+        <SignUpForm onSubmit={onSubmit}>
+          <Title>Sign Up</Title>
+          {error && <ErrorMessage>{error}</ErrorMessage>}
+          <Input
+            type="text"
+            placeholder="Name"
+            name="name"
+            value={name}
+            onChange={onChange}
+            required
+          />
+          <Input
+            type="email"
+            placeholder="Email"
+            name="email"
+            value={email}
+            onChange={onChange}
+            required
+          />
+          <Input
+            type="password"
+            placeholder="Password"
+            name="password"
+            value={password}
+            onChange={onChange}
+            minLength="6"
+            required
+          />
+          <Input
+            type="password"
+            placeholder="Confirm Password"
+            name="password2"
+            value={password2}
+            onChange={onChange}
+            minLength="6"
+            required
+          />
+          <Input
+            type="text"
+            placeholder="Phone Number"
+            name="phone"
+            value={phone}
+            onChange={onChange}
+          />
+          <Input
+            type="text"
+            placeholder="Address"
+            name="address"
+            value={address}
+            onChange={onChange}
+          />
+          <Input
+            type="date"
+            placeholder="Date of Birth"
+            name="dob"
+            value={dob}
+            onChange={onChange}
+          />
+          <Button type="submit">Sign Up</Button>
+        </SignUpForm>
+      </SignUpContainer>
+      <Footer />
+    </>
   );
 };
 
