@@ -137,7 +137,7 @@ const Navbar = () => {
   return (
     <Nav>
       <Logo to="/">LooterBank</Logo>
-      <div>
+      <div style={{ display: 'flex', alignItems: 'center' }}>
         <NavLink to="/">Home</NavLink>
         <NavLink to="/about">About Us</NavLink>
         <NavLink to="/contact">Contact</NavLink>

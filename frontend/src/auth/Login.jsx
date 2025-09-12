@@ -9,39 +9,50 @@ const LoginContainer = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  height: calc(100vh - 100px);
+  min-height: 100vh;
+  background: #f9f9f9;
 `;
 
-const LoginForm = styled.form`
-  background: rgba(0, 0, 0, 0.7);
-  padding:2rem;
-  border-radius: 10px;
-  color: white;
-  width: 300px;
-  display: flex;
-  flex-direction: column;
+const LoginCard = styled.div`
+  background: white;
+  padding: 3rem;
+  border-radius: 15px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+  width: 400px;
+  max-width: 90%;
 `;
 
 const Title = styled.h2`
   text-align: center;
-  margin-bottom: 1.5rem;
+  margin-bottom: 2rem;
+  font-size: 2rem;
+  font-weight: 700;
+  color: #333;
+`;
+
+const Form = styled.form`
+  display: flex;
+  flex-direction: column;
 `;
 
 const Input = styled.input`
-  padding: 0.8rem;
-  margin-bottom: 1rem;
+  padding: 1rem;
+  margin-bottom: 1.5rem;
   border: 1px solid #ccc;
-  border-radius: 5px;
+  border-radius: 8px;
+  font-size: 1rem;
 `;
 
 const Button = styled.button`
-  padding: 0.8rem;
+  padding: 1rem;
   background-color: #007bff;
   color: white;
   border: none;
-  border-radius: 5px;
+  border-radius: 8px;
   cursor: pointer;
-  font-size: 1rem;
+  font-size: 1.1rem;
+  font-weight: 600;
+  transition: background-color 0.3s ease;
 
   &:hover {
     background-color: #0056b3;
@@ -50,11 +61,13 @@ const Button = styled.button`
 
 const SignUpLink = styled.p`
   text-align: center;
-  margin-top: 1rem;
+  margin-top: 1.5rem;
+  font-size: 0.9rem;
 
   a {
     color: #007bff;
     text-decoration: none;
+    font-weight: 600;
 
     &:hover {
       text-decoration: underline;
@@ -103,30 +116,32 @@ const Login = () => {
     <>
       <Navbar />
       <LoginContainer>
-        <LoginForm onSubmit={onSubmit}>
-          <Title>Login</Title>
-          <Input
-            type="email"
-            placeholder="Email"
-            name="email"
-            value={email}
-            onChange={onChange}
-            required
-          />
-          <Input
-            type="password"
-            placeholder="Password"
-            name="password"
-            value={password}
-            onChange={onChange}
-            minLength="6"
-            required
-          />
-          <Button type="submit">Login</Button>
-          <SignUpLink>
-            Don't have an account? <Link to="/signup">Sign Up</Link>
-          </SignUpLink>
-        </LoginForm>
+        <LoginCard>
+          <Title>Welcome Back</Title>
+          <Form onSubmit={onSubmit}>
+            <Input
+              type="email"
+              placeholder="Email"
+              name="email"
+              value={email}
+              onChange={onChange}
+              required
+            />
+            <Input
+              type="password"
+              placeholder="Password"
+              name="password"
+              value={password}
+              onChange={onChange}
+              minLength="6"
+              required
+            />
+            <Button type="submit">Login</Button>
+            <SignUpLink>
+              Don't have an account? <Link to="/signup">Sign Up</Link>
+            </SignUpLink>
+          </Form>
+        </LoginCard>
       </LoginContainer>
       <Footer />
     </>

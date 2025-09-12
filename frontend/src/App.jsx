@@ -8,12 +8,8 @@ import AboutUs from './pages/AboutUs';
 import Contact from './pages/Contact';
 import FAQ from './pages/FAQ';
 import UserHome from './pages/UserHome';
-import BackgroundImage from '/images/money.jpg';
 
 const AppContainer = styled.div`
-  background-image: url(${BackgroundImage});
-  background-size: cover;
-  background-position: center;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
