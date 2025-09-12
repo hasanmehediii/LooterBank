@@ -85,6 +85,7 @@ To set up the project, follow these steps:
     From the `backend` directory, run:
     ```bash
     npm start
+    node src/server.js
     ```
     The backend server will run on `http://localhost:5000`.
 
