@@ -22,7 +22,8 @@ const Sidebar = styled.div`
 `;
 
 const SidebarHeader = styled.div`
-  padding: 2rem;
+  padding: 0.5rem;
+  padding-top: 7rem;
   text-align: center;
   border-bottom: 1px solid #eee;
 `;
@@ -35,6 +36,7 @@ const Logo = styled.h1`
 
 const SidebarMenu = styled.ul`
   list-style: none;
+  padding-bottom: 1rem;
   padding: 1rem 0;
   margin: 0;
 `;
@@ -67,6 +69,8 @@ const MainContent = styled.main`
 
 const WelcomeHeader = styled.div`
   margin-bottom: 2rem;
+  margin-top: 1rem;
+  padding-top: 1.5rem;
 `;
 
 const WelcomeTitle = styled.h2`
