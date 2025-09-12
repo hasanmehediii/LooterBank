@@ -7,14 +7,15 @@ import { FaTachometerAlt, FaUniversity, FaExchangeAlt, FaPiggyBank, FaUserCircle
 
 const UserHomeContainer = styled.div`
   display: flex;
+  padding-top: 6rem;
   min-height: 100vh;
-  background: #f9f9f9;
+  background: #e9e4ffff;
   font-family: 'Poppins', sans-serif;
 `;
 
 const Sidebar = styled.div`
   width: 250px;
-  background: #fff;
+  background: #e9e4ffff;
   color: #333;
   display: flex;
   flex-direction: column;
@@ -25,7 +26,7 @@ const SidebarHeader = styled.div`
   padding: 0.5rem;
   padding-top: 7rem;
   text-align: center;
-  border-bottom: 1px solid #eee;
+  border-bottom: 1px solid #ffdbdbff;
 `;
 
 const Logo = styled.h1`
@@ -65,23 +66,28 @@ const SidebarMenuItem = styled.li`
 const MainContent = styled.main`
   flex-grow: 1;
   padding: 2rem;
+  padding-top: 8rem;
+  background-image: url('/images/bank_background.jpg');
+  background-repeat: no-repeat;
+  background-position: right;
+  background-size: contain;
 `;
 
 const WelcomeHeader = styled.div`
   margin-bottom: 2rem;
   margin-top: 1rem;
-  padding-top: 1.5rem;
 `;
 
 const WelcomeTitle = styled.h2`
   font-size: 2rem;
   font-weight: 700;
-  color: #333;
+  color: #fbffc5ff;
 `;
 
 const WelcomeSubtitle = styled.p`
   font-size: 1rem;
-  color: #777;
+  padding-top: 0.5rem;
+  color: #ccff00ad;
 `;
 
 const MetricsContainer = styled.div`

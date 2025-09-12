@@ -10,16 +10,19 @@ const SignUpContainer = styled.div`
   justify-content: center;
   align-items: center;
   min-height: 100vh;
-  background: #f9f9f9;
-  padding: 4rem 0;
+  background-image: url('/images/money.jpg');
+  background-size: cover;
+  background-position: center;
+  padding: 6rem 3rem;
 `;
 
 const SignUpCard = styled.div`
-  background: white;
-  padding: 3rem;
+  background: rgba(255, 255, 255, 0.9);
   border-radius: 15px;
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
   width: 800px;
+  padding-top: 8rem;
+  padding: 3rem;
   max-width: 90%;
 `;
 

@@ -10,14 +10,16 @@ const LoginContainer = styled.div`
   justify-content: center;
   align-items: center;
   min-height: 100vh;
-  background: #f9f9f9;
+  background-image: url('/images/money.jpg');
+  background-size: cover;
+  background-position: center;
 `;
 
 const LoginCard = styled.div`
-  background: white;
+  background: rgba(255, 255, 255, 0.9);
   padding: 3rem;
   border-radius: 15px;
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
   width: 400px;
   max-width: 90%;
 `;
