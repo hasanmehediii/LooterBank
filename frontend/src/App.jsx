@@ -8,6 +8,7 @@ import AboutUs from './pages/AboutUs';
 import Contact from './pages/Contact';
 import FAQ from './pages/FAQ';
 import UserHome from './pages/UserHome';
+import UserProfile from './pages/profile/UserProfile';
 
 const AppContainer = styled.div`
   min-height: 100vh;
@@ -31,6 +32,7 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<SignUp />} />
           <Route path="/home" element={<UserHome />} />
+          <Route path="/user-profile" element={<UserProfile />} />
         </Routes>
       </MainContent>
     </AppContainer>

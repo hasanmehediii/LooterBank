@@ -1,40 +1,139 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import Navbar from '../../common/Navbar';
 import Footer from '../../common/Footer';
+import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
-const UserProfileContainer = styled.div`
+const PageContainer = styled.div`
+  min-height: 100vh;
+  background-image: url('/images/bank_background.jpg'); /* Using a generic background */
+  background-size: cover;
+  background-position: center;
+  color: white;
+  padding-top: 6rem;
   display: flex;
   flex-direction: column;
+`;
+
+const ContentWrapper = styled.div`
+  flex-grow: 1;
+  display: flex;
+  justify-content: center;
   align-items: center;
+  padding-top: 7rem;
   padding: 2rem;
-  color: white;
+  background: rgba(0, 0, 0, 0.6);
 `;
 
-const ProfileCard = styled.div`
-  background: rgba(0, 0, 0, 0.7);
-  padding: 2rem;
-  border-radius: 10px;
-  width: 500px;
-  max-width: 90%;
-`;
-
-const Title = styled.h2`
+const ProfileContainer = styled.div`
+  max-width: 900px;
+  width: 100%;
+  background: rgba(255, 255, 255, 0.1);
+  padding: 3rem;
+  border-radius: 15px;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
   text-align: center;
-  margin-bottom: 1.5rem;
 `;
 
-const ProfileDetail = styled.p`
-  margin-bottom: 0.5rem;
+const Title = styled.h1`
+  font-size: 3.5rem;
+  margin-bottom: 2rem;
+  font-weight: 700;
+`;
+
+const ProfileForm = styled.form`
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+  text-align: left;
+
+  @media (max-width: 768px) {
+    grid-template-columns: 1fr;
+  }
+`;
+
+const FormGroup = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
+
+const Label = styled.label`
   font-size: 1.1rem;
+  margin-bottom: 0.5rem;
+  font-weight: 600;
+`;
+
+const Input = styled.input`
+  padding: 0.8rem;
+  border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  background: rgba(255, 255, 255, 0.2);
+  color: white;
+  font-size: 1rem;
+
+  &::placeholder {
+    color: rgba(255, 255, 255, 0.7);
+  }
+`;
+
+const CheckboxGroup = styled.div`
+  display: flex;
+  align-items: center;
+  margin-top: 1rem;
+`;
+
+const Checkbox = styled.input`
+  margin-right: 0.5rem;
+`;
+
+const Button = styled.button`
+  grid-column: 1 / -1;
+  padding: 1rem;
+  border-radius: 8px;
+  border: none;
+  background-color: #007bff;
+  color: white;
+  font-size: 1.2rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+
+  &:hover {
+    background-color: #0056b3;
+  }
+`;
+
+const ErrorMessage = styled.p`
+  color: #ff4d4d;
+  margin-top: 1rem;
+  grid-column: 1 / -1;
+`;
+
+const SuccessMessage = styled.p`
+  color: #4CAF50;
+  margin-top: 1rem;
+  grid-column: 1 / -1;
 `;
 
 const UserProfile = () => {
-  const [userData, setUserData] = useState(null);
+  const [userData, setUserData] = useState({
+    name: '',
+    email: '',
+    phone: '',
+    address: '',
+    dob: '',
+    mfaEnabled: false,
+    roles: [],
+    status: '',
+    lastLogin: '',
+    createdAt: '',
+    updatedAt: '',
+  });
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState('');
+  const [error, setError] = useState(null);
+  const [success, setSuccess] = useState(null);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -52,65 +151,192 @@ const UserProfile = () => {
           },
         };
         const res = await axios.get('http://localhost:5000/api/users/me', config);
-        setUserData(res.data);
-        setLoading(false);
+        setUserData({
+          name: res.data.name,
+          email: res.data.email,
+          phone: res.data.profile?.phone || '',
+          address: res.data.profile?.address || '',
+          dob: res.data.profile?.dob || '',
+          mfaEnabled: res.data.mfaEnabled,
+          roles: res.data.roles,
+          status: res.data.status,
+          lastLogin: res.data.lastLogin ? new Date(res.data.lastLogin).toLocaleString() : 'N/A',
+          createdAt: res.data.createdAt ? new Date(res.data.createdAt).toLocaleString() : 'N/A',
+          updatedAt: res.data.updatedAt ? new Date(res.data.updatedAt).toLocaleString() : 'N/A',
+        });
       } catch (err) {
-        console.error(err);
-        setError('Failed to fetch user profile.');
+        console.error('Error fetching user profile:', err);
+        setError('Failed to fetch user profile. Please try again.');
+        if (err.response && err.response.status === 401) {
+          localStorage.removeItem('token');
+          navigate('/login');
+        }
+      } finally {
         setLoading(false);
-        localStorage.removeItem('token');
-        navigate('/login');
       }
     };
 
     fetchUserProfile();
   }, [navigate]);
 
+  const handleChange = (e) => {
+    const { name, value, type, checked } = e.target;
+    setUserData((prevData) => ({
+      ...prevData,
+      [name]: type === 'checkbox' ? checked : value,
+    }));
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setSuccess(null);
+    setError(null);
+
+    const token = localStorage.getItem('token');
+    if (!token) {
+      navigate('/login');
+      return;
+    }
+
+    try {
+      const config = {
+        headers: {
+          'x-auth-token': token,
+          'Content-Type': 'application/json',
+        },
+      };
+      const updateData = {
+        name: userData.name,
+        email: userData.email,
+        mfaEnabled: userData.mfaEnabled,
+        profile: {
+          phone: userData.phone,
+          address: userData.address,
+          dob: userData.dob,
+        },
+      };
+      await axios.put('http://localhost:5000/api/users/me', updateData, config);
+      setSuccess('Profile updated successfully!');
+    } catch (err) {
+      console.error('Error updating user profile:', err);
+      setError('Failed to update profile. Please try again.');
+    }
+  };
+
   if (loading) {
     return (
-      <UserProfileContainer>
+      <PageContainer>
         <Navbar />
-        <ProfileCard>
-          <Title>Loading Profile...</Title>
-        </ProfileCard>
+        <ContentWrapper>
+          <ProfileContainer>
+            <Title>Loading Profile...</Title>
+          </ProfileContainer>
+        </ContentWrapper>
         <Footer />
-      </UserProfileContainer>
-    );
-  }
-
-  if (error) {
-    return (
-      <UserProfileContainer>
-        <Navbar />
-        <ProfileCard>
-          <Title>Error: {error}</Title>
-        </ProfileCard>
-        <Footer />
-      </UserProfileContainer>
+      </PageContainer>
     );
   }
 
   return (
-    <UserProfileContainer>
+    <PageContainer>
       <Navbar />
-      <ProfileCard>
-        <Title>User Profile</Title>
-        {userData && (
-          <>
-            <ProfileDetail><strong>Name:</strong> {userData.name}</ProfileDetail>
-            <ProfileDetail><strong>Email:</strong> {userData.email}</ProfileDetail>
-            <ProfileDetail><strong>Phone:</strong> {userData.profile.phone}</ProfileDetail>
-            <ProfileDetail><strong>Address:</strong> {userData.profile.address}</ProfileDetail>
-            <ProfileDetail><strong>Date of Birth:</strong> {userData.profile.dob}</ProfileDetail>
-            <ProfileDetail><strong>Status:</strong> {userData.status}</ProfileDetail>
-            <ProfileDetail><strong>MFA Enabled:</strong> {userData.mfaEnabled ? 'Yes' : 'No'}</ProfileDetail>
-            <ProfileDetail><strong>Last Login:</strong> {new Date(userData.lastLogin).toLocaleString()}</ProfileDetail>
-            <ProfileDetail><strong>Member Since:</strong> {new Date(userData.createdAt).toLocaleDateString()}</ProfileDetail>
-          </>
-        )}
-      </ProfileCard>
+      <ContentWrapper>
+        <ProfileContainer>
+          <Title>User Profile</Title>
+          {error && <ErrorMessage>{error}</ErrorMessage>}
+          {success && <SuccessMessage>{success}</SuccessMessage>}
+          <ProfileForm onSubmit={handleSubmit}>
+            <FormGroup>
+              <Label htmlFor="name">Name</Label>
+              <Input
+                type="text"
+                id="name"
+                name="name"
+                value={userData.name}
+                onChange={handleChange}
+                required
+              />
+            </FormGroup>
+            <FormGroup>
+              <Label htmlFor="email">Email</Label>
+              <Input
+                type="email"
+                id="email"
+                name="email"
+                value={userData.email}
+                onChange={handleChange}
+                required
+              />
+            </FormGroup>
+            <FormGroup>
+              <Label htmlFor="phone">Phone</Label>
+              <Input
+                type="text"
+                id="phone"
+                name="phone"
+                value={userData.phone}
+                onChange={handleChange}
+              />
+            </FormGroup>
+            <FormGroup>
+              <Label htmlFor="address">Address</Label>
+              <Input
+                type="text"
+                id="address"
+                name="address"
+                value={userData.address}
+                onChange={handleChange}
+              />
+            </FormGroup>
+            <FormGroup>
+              <Label htmlFor="dob">Date of Birth</Label>
+              <Input
+                type="date"
+                id="dob"
+                name="dob"
+                value={userData.dob}
+                onChange={handleChange}
+              />
+            </FormGroup>
+            <FormGroup>
+              <Label>MFA Enabled</Label>
+              <CheckboxGroup>
+                <Checkbox
+                  type="checkbox"
+                  id="mfaEnabled"
+                  name="mfaEnabled"
+                  checked={userData.mfaEnabled}
+                  onChange={handleChange}
+                />
+                <Label htmlFor="mfaEnabled">Enable Multi-Factor Authentication</Label>
+              </CheckboxGroup>
+            </FormGroup>
+            <FormGroup>
+              <Label>Roles</Label>
+              <Input type="text" value={userData.roles.join(', ')} disabled />
+            </FormGroup>
+            <FormGroup>
+              <Label>Account Status</Label>
+              <Input type="text" value={userData.status} disabled />
+            </FormGroup>
+            <FormGroup>
+              <Label>Last Login</Label>
+              <Input type="text" value={userData.lastLogin} disabled />
+            </FormGroup>
+            <FormGroup>
+              <Label>Member Since</Label>
+              <Input type="text" value={userData.createdAt} disabled />
+            </FormGroup>
+            <FormGroup>
+              <Label>Last Updated</Label>
+              <Input type="text" value={userData.updatedAt} disabled />
+            </FormGroup>
+            <Button type="submit">Save Changes</Button>
+          </ProfileForm>
+        </ProfileContainer>
+      </ContentWrapper>
       <Footer />
-    </UserProfileContainer>
+    </PageContainer>
   );
 };
 

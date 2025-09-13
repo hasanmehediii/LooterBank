@@ -1,7 +1,7 @@
 # LooterBank
 
 <p align="center">
-  <img src="frontend/public/images/money.png" alt="LooterBank Logo" width="150" height="150" style="border-radius: 50%; border: 2px solid #ccc;" />
+  <img src="frontend/public/images/money.png" alt="LooterBank Logo" width="150" height="150"/>
   <br>
   <strong>LooterBank – Unsafe your money most</strong>
 </p>
