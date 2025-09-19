@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:app/common/footer.dart';
+import 'package:app/auth/login.dart'; // new screen
 
 class WelcomeScreen extends StatelessWidget {
   const WelcomeScreen({super.key});
@@ -6,57 +8,179 @@ class WelcomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: const Text("LooterBank"),
+        centerTitle: true,
+        elevation: 0,
+        backgroundColor: Colors.lightBlue,
+      ),
       body: SafeArea(
-        child: Padding(
-          padding: const EdgeInsets.all(24.0),
+        child: SingleChildScrollView(
           child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              Image.asset('assets/money.png', width: 80, height: 80),
-              const SizedBox(height: 24),
-              Text(
-                'Welcome to LooterBank',
-                style: Theme.of(context).textTheme.headlineLarge,
-                textAlign: TextAlign.center,
-              ),
-              const SizedBox(height: 16),
-              Text(
-                'Experience secure and convenient banking at your fingertips',
-                style: Theme.of(
-                  context,
-                ).textTheme.bodyLarge?.copyWith(color: Colors.black54),
-                textAlign: TextAlign.center,
-              ),
-              const SizedBox(height: 32),
-              ElevatedButton(
-                onPressed: () {
-                  // TODO: Implement login navigation
-                },
-                child: const Text('Log In', style: TextStyle(fontSize: 18)),
-              ),
-              const SizedBox(height: 16),
-              OutlinedButton(
-                onPressed: () {
-                  // TODO: Implement sign up navigation
-                },
-                style: OutlinedButton.styleFrom(
-                  foregroundColor: Theme.of(context).colorScheme.primary,
-                  side: BorderSide(
-                    color: Theme.of(context).colorScheme.primary,
+              // Hero Section with background image
+              Stack(
+                children: [
+                  Container(
+                    height: MediaQuery.of(context).size.height * 0.45,
+                    decoration: const BoxDecoration(
+                      image: DecorationImage(
+                        image: AssetImage("assets/money.jpg"),
+                        fit: BoxFit.cover,
+                      ),
+                    ),
                   ),
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: 32,
-                    vertical: 16,
+                  Container(
+                    height: MediaQuery.of(context).size.height * 0.45,
+                    color: Colors.black.withOpacity(0.4), // overlay
                   ),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(12),
+                  Positioned(
+                    left: 24,
+                    bottom: 30,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          "LooterBank",
+                          style: Theme.of(context).textTheme.displayLarge
+                              ?.copyWith(
+                                color: Colors.white,
+                                fontWeight: FontWeight.bold,
+                              ),
+                        ),
+                        const SizedBox(height: 8),
+                        Text(
+                          "Unsafe your money",
+                          style: Theme.of(context).textTheme.titleLarge
+                              ?.copyWith(
+                                color: Colors.white70,
+                                fontWeight: FontWeight.w500,
+                              ),
+                        ),
+                        const SizedBox(height: 20),
+                        ElevatedButton(
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: Colors.lightBlue,
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: 32,
+                              vertical: 14,
+                            ),
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(12),
+                            ),
+                          ),
+                          onPressed: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => const LoginScreen(),
+                              ),
+                            );
+                          },
+                          child: const Text(
+                            "Get Started",
+                            style: TextStyle(
+                              fontSize: 18,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
+                ],
+              ),
+
+              // Features Section
+              Container(
+                color: Colors.grey.shade100,
+                padding: const EdgeInsets.symmetric(
+                  vertical: 40,
+                  horizontal: 20,
                 ),
-                child: const Text('Sign Up', style: TextStyle(fontSize: 18)),
+                child: Column(
+                  children: [
+                    Text(
+                      "Why LooterBank?",
+                      style: Theme.of(context).textTheme.headlineMedium
+                          ?.copyWith(fontWeight: FontWeight.bold),
+                    ),
+                    const SizedBox(height: 80),
+                    Wrap(
+                      spacing: 50,
+                      runSpacing: 50,
+                      alignment: WrapAlignment.center,
+                      children: const [
+                        _FeatureCard(
+                          icon: Icons.shield,
+                          title: "Rock-Solid Security",
+                          text:
+                              "Your funds and data are protected by industry-leading security measures.",
+                        ),
+                        _FeatureCard(
+                          icon: Icons.people,
+                          title: "Customer-First Approach",
+                          text:
+                              "We prioritize your needs with 24/7 support and personalized services.",
+                        ),
+                        _FeatureCard(
+                          icon: Icons.account_balance,
+                          title: "Modern Banking",
+                          text:
+                              "Enjoy a seamless digital experience with our intuitive online and mobile banking.",
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
               ),
+
+              // Footer
+              const Footer(),
             ],
           ),
         ),
+      ),
+    );
+  }
+}
+
+class _FeatureCard extends StatelessWidget {
+  final IconData icon;
+  final String title;
+  final String text;
+
+  const _FeatureCard({
+    required this.icon,
+    required this.title,
+    required this.text,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+      width: 280,
+      child: Column(
+        children: [
+          Icon(icon, size: 48, color: Colors.blue),
+          const SizedBox(height: 12),
+          Text(
+            title,
+            style: Theme.of(
+              context,
+            ).textTheme.titleLarge?.copyWith(fontWeight: FontWeight.w600),
+            textAlign: TextAlign.center,
+          ),
+          const SizedBox(height: 8),
+          Text(
+            text,
+            style: Theme.of(
+              context,
+            ).textTheme.bodyMedium?.copyWith(color: Colors.black54),
+            textAlign: TextAlign.center,
+          ),
+        ],
       ),
     );
   }
