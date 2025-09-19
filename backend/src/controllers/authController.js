@@ -1,42 +1,58 @@
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
+const mongoose = require('mongoose');
 const User = require('../models/userModel');
+const Account = require('../models/accountModel');
 
-// Register User
-exports.registerUser = async (req, res) => {
-  const { name, email, password, phone, address, dob } = req.body;
+// Signup User
+exports.signup = async (req, res) => {
+  const { name, email, password, phone } = req.body;
+
+  const session = await mongoose.startSession();
+  session.startTransaction();
 
   try {
     // Check if user exists
-    let user = await User.findOne({ email });
+    let user = await User.findOne({ email }).session(session);
     if (user) {
+      await session.abortTransaction();
+      session.endSession();
       return res.status(400).json({ msg: 'User already exists' });
     }
 
     // Create new user
+    const salt = await bcrypt.genSalt(10);
+    const passwordHash = await bcrypt.hash(password, salt);
+
     user = new User({
       name,
       email,
-      passwordHash: password, // Will be hashed below
-      roles: ['user'],
-      status: 'active',
-      profile: {
-        phone,
-        address,
-        dob,
-      },
+      passwordHash,
+      phone,
     });
 
-    // Hash password
-    const salt = await bcrypt.genSalt(10);
-    user.passwordHash = await bcrypt.hash(password, salt);
+    const savedUser = await user.save({ session });
 
-    await user.save();
+    // Create new account
+    const accountNumber = Math.floor(10000000 + Math.random() * 90000000).toString();
+
+    const account = new Account({
+      userId: savedUser._id,
+      accountNumber,
+      accountType: 'savings',
+      balance: 0,
+      currency: 'BDT',
+    });
+
+    await account.save({ session });
+
+    await session.commitTransaction();
+    session.endSession();
 
     // Create and return token
     const payload = {
       user: {
-        id: user.id,
+        id: savedUser.id,
       },
     };
 
@@ -50,13 +66,15 @@ exports.registerUser = async (req, res) => {
       }
     );
   } catch (err) {
+    await session.abortTransaction();
+    session.endSession();
     console.error(err.message);
     res.status(500).send('Server error');
   }
 };
 
 // Login User
-exports.loginUser = async (req, res) => {
+exports.login = async (req, res) => {
   const { email, password } = req.body;
 
   try {

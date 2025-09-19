@@ -1,72 +1,93 @@
-accounts:
+--- USERS ---
 {
-  "_id": { "$oid": "68bc1547bee4fe9c0fd6c972" },
-  "userIds": ["ObjectId_user1", "ObjectId_user2"],
-  "accountNumber": "CHK-00123456789",
-  "accountType": "checking",
-  "balance": { "$numberDouble": "2500.75" },
-  "currency": "USD",
-  "status": "open",
-  "overdraftLimit": { "$numberInt": "500" },
-  "flags": ["vip_client"],
-  "createdAt": "2025-01-01T10:05:00Z",
-  "updatedAt": "2025-09-01T12:30:00Z"
-}
-
-
-activity_log:
-{
-  "_id": { "$oid": "68bc1591bee4fe9c0fd6c973" },
-  "userId": "ObjectId_user",
-  "action": "account.update_status",
-  "resourceType": "account",
-  "resourceId": "ObjectId_account",
-  "details": {
-    "oldStatus": "open",
-    "newStatus": "frozen",
-    "reason": "Suspicious activity detected"
-  },
-  "ip": "192.168.1.55",
-  "device": "Chrome Desktop",
-  "timestamp": "2025-09-01T14:45:00Z"
-}
-
-
-transactions:
-{
-  "_id": { "$oid": "68bc15bdbee4fe9c0fd6c974" },
-  "accountId": "ObjectId_account",
-  "type": "credit",
-  "amount": { "$numberInt": "1000" },
-  "currency": "USD",
-  "description": "Salary deposit for August",
-  "transactionDate": "2025-08-31T09:00:00Z",
-  "status": "completed",
-  "initiatedBy": "ObjectId_user",
-  "relatedTransactionId": null,
-  "metadata": {
-    "ip": "192.168.1.100",
-    "device": "iOS Safari"
-  },
-  "createdAt": "2025-08-31T09:00:00Z"
-}
-
-
-user:
-{
-  "_id": { "$oid": "68bc15dbbee4fe9c0fd6c975" },
-  "name": "Alice Johnson",
-  "email": "alice.johnson@example.com",
-  "passwordHash": "$2b$10$...",
-  "roles": ["user"],
+  "_id": ObjectId("6501f5e7eabc123456789001"),
+  "name": "Mehedi Hasan",
+  "email": "mehedi@example.com",
+  "passwordHash": "pw1",
+  "phone": "+8801712345678",
+  "role": "user",
   "status": "active",
-  "mfaEnabled": true,
-  "lastLogin": "2025-08-25T10:15:00Z",
-  "profile": {
-    "phone": "+1234567890",
-    "address": "123 Elm St, NYC",
-    "dob": "1985-06-10"
-  },
-  "createdAt": "2025-01-01T10:00:00Z",
-  "updatedAt": "2025-09-01T12:00:00Z"
+  "createdAt": ISODate("2025-09-20T10:00:00Z"),
+  "updatedAt": ISODate("2025-09-20T10:00:00Z")
 }
+
+--- ACCOUNTS ---
+{
+  "_id": ObjectId("6501f5e7eabc123456789002"),
+  "userId": ObjectId("6501f5e7eabc123456789001"),
+  "accountNumber": "20250001",
+  "accountType": "savings",
+  "balance": 15000,
+  "currency": "BDT",
+  "createdAt": ISODate("2025-09-20T10:05:00Z"),
+  "updatedAt": ISODate("2025-09-20T10:05:00Z")
+}
+
+--- TRANSACTIONS ---
+{
+  "_id": ObjectId("6501f5e7eabc123456789003"),
+  "accountId": ObjectId("6501f5e7eabc123456789002"),
+  "type": "deposit",
+  "amount": 2000,
+  "currency": "BDT",
+  "status": "success",
+  "description": "Initial deposit",
+  "createdAt": ISODate("2025-09-20T10:10:00Z"),
+  "updatedAt": ISODate("2025-09-20T10:10:00Z")
+}
+
+--- ADMINACTIONS ---
+{
+  "_id": ObjectId("6501f5e7eabc123456789004"),
+  "adminId": ObjectId("6501f5e7eabc123456789010"),
+  "action": "freeze_account",
+  "targetUserId": ObjectId("6501f5e7eabc123456789001"),
+  "description": "Suspicious activity detected",
+  "createdAt": ISODate("2025-09-20T10:15:00Z"),
+  "updatedAt": ISODate("2025-09-20T10:15:00Z")
+}
+
+--- CARDS ---
+{
+  "_id": ObjectId("6501f5e7eabc123456789005"),
+  "accountId": ObjectId("6501f5e7eabc123456789002"),
+  "cardNumber": "4111111111111111",
+  "expiryDate": "12/29",
+  "cvvHash": "cvv1",
+  "cardType": "debit",
+  "status": "active",
+  "createdAt": ISODate("2025-09-20T10:20:00Z"),
+  "updatedAt": ISODate("2025-09-20T10:20:00Z")
+}
+
+--- NOTIFICATIONS ---
+{
+  "_id": ObjectId("6501f5e7eabc123456789006"),
+  "userId": ObjectId("6501f5e7eabc123456789001"),
+  "title": "Deposit Alert",
+  "message": "You deposited 2000 BDT",
+  "read": false,
+  "createdAt": ISODate("2025-09-20T10:25:00Z"),
+  "updatedAt": ISODate("2025-09-20T10:25:00Z")
+}
+
+--- AUDITLOGS ---
+{
+  "_id": ObjectId("6501f5e7eabc123456789007"),
+  "event": "user_login",
+  "userId": ObjectId("6501f5e7eabc123456789001"),
+  "ipAddress": "103.54.11.22",
+  "device": "Chrome / Windows",
+  "createdAt": ISODate("2025-09-20T10:30:00Z"),
+  "updatedAt": ISODate("2025-09-20T10:30:00Z")
+}
+
+
+
+   * Users: http://localhost:5000/api/users
+   * Accounts: http://localhost:5000/api/accounts
+   * Transactions: http://localhost:5000/api/transactions
+   * Admin Actions: http://localhost:5000/api/admin/actions
+   * Cards: http://localhost:5000/api/cards
+   * Notifications: http://localhost:5000/api/notifications
+   * Audit Logs: http://localhost:5000/api/audit-logs

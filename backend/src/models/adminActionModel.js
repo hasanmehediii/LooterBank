@@ -1,27 +1,21 @@
 const mongoose = require('mongoose');
 
-const AccountSchema = new mongoose.Schema({
-  userId: {
+const AdminActionSchema = new mongoose.Schema({
+  adminId: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'User',
     required: true,
   },
-  accountNumber: {
-    type: String,
-    required: true,
-    unique: true,
-  },
-  accountType: {
+  action: {
     type: String,
     required: true,
   },
-  balance: {
-    type: Number,
-    required: true,
+  targetUserId: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'User',
   },
-  currency: {
+  description: {
     type: String,
-    required: true,
   },
   createdAt: {
     type: Date,
@@ -33,4 +27,4 @@ const AccountSchema = new mongoose.Schema({
   },
 });
 
-module.exports = mongoose.model('Account', AccountSchema, 'accounts');
+module.exports = mongoose.model('AdminAction', AdminActionSchema, 'adminactions');

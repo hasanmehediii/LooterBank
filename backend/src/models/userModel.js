@@ -14,25 +14,17 @@ const UserSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  roles: {
-    type: [String],
-    required: true,
-  },
-  status: {
+  phone: {
     type: String,
     required: true,
   },
-  mfaEnabled: {
-    type: Boolean,
-    default: false,
+  role: {
+    type: String,
+    default: 'user',
   },
-  lastLogin: {
-    type: Date,
-  },
-  profile: {
-    phone: String,
-    address: String,
-    dob: String,
+  status: {
+    type: String,
+    default: 'active',
   },
   createdAt: {
     type: Date,
@@ -44,4 +36,4 @@ const UserSchema = new mongoose.Schema({
   },
 });
 
-module.exports = mongoose.model('User', UserSchema, 'user');
+module.exports = mongoose.model('User', UserSchema, 'users');

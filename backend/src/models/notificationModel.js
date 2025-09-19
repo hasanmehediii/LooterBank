@@ -1,27 +1,22 @@
 const mongoose = require('mongoose');
 
-const AccountSchema = new mongoose.Schema({
+const NotificationSchema = new mongoose.Schema({
   userId: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'User',
     required: true,
   },
-  accountNumber: {
-    type: String,
-    required: true,
-    unique: true,
-  },
-  accountType: {
+  title: {
     type: String,
     required: true,
   },
-  balance: {
-    type: Number,
-    required: true,
-  },
-  currency: {
+  message: {
     type: String,
     required: true,
+  },
+  read: {
+    type: Boolean,
+    default: false,
   },
   createdAt: {
     type: Date,
@@ -33,4 +28,4 @@ const AccountSchema = new mongoose.Schema({
   },
 });
 
-module.exports = mongoose.model('Account', AccountSchema, 'accounts');
+module.exports = mongoose.model('Notification', NotificationSchema, 'notifications');

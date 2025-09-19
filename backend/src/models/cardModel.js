@@ -1,29 +1,30 @@
 const mongoose = require('mongoose');
 
-const TransactionSchema = new mongoose.Schema({
+const CardSchema = new mongoose.Schema({
   accountId: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Account',
     required: true,
   },
-  type: {
+  cardNumber: {
     type: String,
     required: true,
   },
-  amount: {
-    type: Number,
+  expiryDate: {
+    type: String,
     required: true,
   },
-  currency: {
+  cvvHash: {
+    type: String,
+    required: true,
+  },
+  cardType: {
     type: String,
     required: true,
   },
   status: {
     type: String,
     required: true,
-  },
-  description: {
-    type: String,
   },
   createdAt: {
     type: Date,
@@ -35,4 +36,4 @@ const TransactionSchema = new mongoose.Schema({
   },
 });
 
-module.exports = mongoose.model('Transaction', TransactionSchema, 'transactions');
+module.exports = mongoose.model('Card', CardSchema, 'cards');

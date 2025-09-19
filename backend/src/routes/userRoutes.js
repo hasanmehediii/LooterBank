@@ -8,4 +8,9 @@ const userController = require('../controllers/userController');
 // @access  Private
 router.get('/me', auth, userController.getUserProfile);
 
+// @route   GET api/users
+// @desc    Get all users
+// @access  Public
+router.get('/', userController.getAllUsers);
+
 module.exports = router;
