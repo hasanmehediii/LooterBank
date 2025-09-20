@@ -6,56 +6,67 @@ import Footer from '../common/Footer';
 import { FaTachometerAlt, FaUniversity, FaExchangeAlt, FaPiggyBank, FaUserCircle } from 'react-icons/fa';
 import { AuthContext } from '../context/AuthContext';
 
+// ======== CONTAINER STYLES ========
 const UserHomeContainer = styled.div`
   display: flex;
-  padding-top: 6rem;
   min-height: 100vh;
-  background: #e9e4ffff;
   font-family: 'Poppins', sans-serif;
+  background: #f4f6fc;
+  padding-top: 100px
 `;
 
 const Sidebar = styled.div`
-  width: 250px;
-  background: #e9e4ffff;
-  color: #333;
+  width: 260px;
+  background: #007bff;
+  color: #fff;
   display: flex;
   flex-direction: column;
-  border-right: 1px solid #eee;
+  transition: all 0.3s ease;
+
+  @media (max-width: 768px) {
+    position: fixed;
+    left: 0;
+    top: 0;
+    height: 100%;
+    z-index: 1000;
+    transform: translateX(-100%);
+    &.active {
+      transform: translateX(0);
+    }
+  }
 `;
 
 const SidebarHeader = styled.div`
-  padding: 0.5rem;
-  padding-top: 7rem;
+  padding: 2rem 1rem;
   text-align: center;
-  border-bottom: 1px solid #ffdbdbff;
+  border-bottom: 1px solid rgba(255,255,255,0.2);
 `;
 
 const Logo = styled.h1`
-  font-size: 1.5rem;
+  font-size: 1.8rem;
   font-weight: 700;
-  color: #007bff;
+  color: #fff;
 `;
 
 const SidebarMenu = styled.ul`
   list-style: none;
-  padding-bottom: 1rem;
-  padding: 1rem 0;
-  margin: 0;
+  padding: 0;
+  margin: 1rem 0;
 `;
 
 const SidebarMenuItem = styled.li`
   a {
     display: flex;
     align-items: center;
-    padding: 1rem 2rem;
-    color: #555;
+    padding: 1rem 1.5rem;
+    color: #fff;
     text-decoration: none;
-    font-weight: 600;
-    transition: all 0.3s ease;
+    font-weight: 500;
+    transition: 0.3s;
 
     &:hover {
-      background: #f0f7ff;
-      color: #007bff;
+      background: rgba(255,255,255,0.15);
+      border-radius: 8px;
     }
 
     svg {
@@ -66,59 +77,63 @@ const SidebarMenuItem = styled.li`
 
 const MainContent = styled.main`
   flex-grow: 1;
-  padding: 2rem;
-  padding-top: 6rem; /* Adjusted to match Navbar height */
-  overflow-x: hidden; /* Prevent horizontal overflow */
-  background-image: url('/images/bank_background.jpg');
-  background-repeat: no-repeat;
-  background-position: right;
-  background-size: contain;
+  padding: 6rem 3rem 3rem 3rem;
+  min-height: 100vh;
+  background: linear-gradient(180deg, #e9f0ff 0%, #ffffff 100%);
+  overflow-x: hidden;
 `;
 
 const WelcomeHeader = styled.div`
-  margin-bottom: 2rem;
-  margin-top: 1rem;
+  margin-bottom: 2.5rem;
 `;
 
 const WelcomeTitle = styled.h2`
-  font-size: 2rem;
+  font-size: 2.2rem;
   font-weight: 700;
-  color: #fbffc5ff;
+  color: #333;
 `;
 
 const WelcomeSubtitle = styled.p`
-  font-size: 1rem;
-  padding-top: 0.5rem;
-  color: #ccff00ad;
+  font-size: 1.1rem;
+  margin-top: 0.5rem;
+  color: #555;
 `;
 
+// ======== METRICS ========
 const MetricsContainer = styled.div`
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  grid-gap: 2rem;
-  margin-bottom: 2rem;
+  gap: 2rem;
+  margin-bottom: 3rem;
 `;
 
 const MetricCard = styled.div`
   background: #fff;
-  padding: 2rem;
+  padding: 2rem 1.5rem;
   border-radius: 15px;
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.05);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+
+  &:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 25px rgba(0, 0, 0, 0.12);
+  }
 `;
 
 const MetricTitle = styled.h3`
   font-size: 1rem;
   font-weight: 600;
-  color: #777;
+  color: #888;
   margin-bottom: 0.5rem;
 `;
 
 const MetricValue = styled.p`
-  font-size: 2rem;
+  font-size: 1.8rem;
   font-weight: 700;
-  color: #333;
+  color: #007bff;
 `;
 
+// ======== COMPONENT ========
 const UserHome = () => {
   const { user } = useContext(AuthContext);
 
@@ -133,55 +148,59 @@ const UserHome = () => {
           <SidebarMenu>
             <SidebarMenuItem>
               <Link to="/home">
-                <FaTachometerAlt />
-                Dashboard
+                <FaTachometerAlt /> Dashboard
               </Link>
             </SidebarMenuItem>
             <SidebarMenuItem>
               <Link to="/home/account">
-                <FaUniversity />
-                Accounts
+                <FaUniversity /> Accounts
               </Link>
             </SidebarMenuItem>
             <SidebarMenuItem>
               <Link to="/home/transactions">
-                <FaExchangeAlt />
-                Transactions
+                <FaExchangeAlt /> Transactions
               </Link>
             </SidebarMenuItem>
             <SidebarMenuItem>
               <Link to="/home/loan-apply">
-                <FaPiggyBank />
-                Loans
+                <FaPiggyBank /> Loans
               </Link>
             </SidebarMenuItem>
             <SidebarMenuItem>
               <Link to="/user-profile">
-                <FaUserCircle />
-                Profile
+                <FaUserCircle /> Profile
               </Link>
             </SidebarMenuItem>
           </SidebarMenu>
         </Sidebar>
+
         <MainContent>
           <WelcomeHeader>
             <WelcomeTitle>Welcome back, {user ? user.name : 'User'}!</WelcomeTitle>
             <WelcomeSubtitle>Here's a summary of your account.</WelcomeSubtitle>
           </WelcomeHeader>
+
           <MetricsContainer>
             <MetricCard>
               <MetricTitle>Current Balance</MetricTitle>
-              <MetricValue>{user && user.account ? `${user.account.balance} ${user.account.currency}` : 'Loading...'}</MetricValue>
+              <MetricValue>
+                {user && user.account ? `${user.account.balance} ${user.account.currency}` : 'Loading...'}
+              </MetricValue>
             </MetricCard>
             <MetricCard>
               <MetricTitle>Account Number</MetricTitle>
-              <MetricValue>{user && user.account ? user.account.accountNumber : 'Loading...'}</MetricValue>
+              <MetricValue>
+                {user && user.account ? user.account.accountNumber : 'Loading...'}
+              </MetricValue>
             </MetricCard>
             <MetricCard>
               <MetricTitle>Account Type</MetricTitle>
-              <MetricValue>{user && user.account ? user.account.accountType : 'Loading...'}</MetricValue>
+              <MetricValue>
+                {user && user.account ? user.account.accountType : 'Loading...'}
+              </MetricValue>
             </MetricCard>
           </MetricsContainer>
+
           <Outlet />
         </MainContent>
       </UserHomeContainer>
