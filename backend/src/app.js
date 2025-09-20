@@ -8,7 +8,15 @@ const app = express();
 connectDB();
 
 // Init Middleware
-app.use(cors({ origin: 'http://localhost:3000' }));
+const cors = require('cors');
+
+const allowedOrigins = ['http://localhost:3000', 'https://looterbank.vercel.app'];
+
+const options = {
+  origin: allowedOrigins
+};
+
+app.use(cors(options));
 app.use(express.json({ extended: false }));
 
 app.get('/', (req, res) => res.send('API Running'));
