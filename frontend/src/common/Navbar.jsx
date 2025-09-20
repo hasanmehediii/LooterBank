@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useContext } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
-import axios from 'axios';
+import { AuthContext } from '../context/AuthContext';
 
 const Nav = styled.nav`
   background: rgba(0, 0, 0, 0.5);
@@ -92,40 +92,12 @@ const DropdownItem = styled.div`
 `;
 
 const Navbar = () => {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [userName, setUserName] = useState('');
   const [showDropdown, setShowDropdown] = useState(false);
   const navigate = useNavigate();
-
-  useEffect(() => {
-    const fetchUserData = async () => {
-      const token = localStorage.getItem('token');
-      if (token) {
-        try {
-          const config = {
-            headers: {
-              'x-auth-token': token,
-            },
-          };
-          const res = await axios.get('http://localhost:5000/api/users/me', config);
-          setUserName(res.data.name);
-          setIsLoggedIn(true);
-        } catch (err) {
-          console.error(err);
-          localStorage.removeItem('token');
-          setIsLoggedIn(false);
-        }
-      } else {
-        setIsLoggedIn(false);
-        setUserName('');
-      }
-    };
-    fetchUserData();
-  }, []);
+  const { user, logout } = useContext(AuthContext);
 
   const handleLogout = () => {
-    localStorage.removeItem('token');
-    setIsLoggedIn(false);
+    logout();
     navigate('/login');
   };
 
@@ -142,9 +114,9 @@ const Navbar = () => {
         <NavLink to="/about">About Us</NavLink>
         <NavLink to="/contact">Contact</NavLink>
         <NavLink to="/faq">FAQ</NavLink>
-        {isLoggedIn ? (
+        {user ? (
           <UserMenu onClick={() => setShowDropdown(!showDropdown)}>
-            <UserName>{userName}</UserName>
+            <UserName>{user.name}</UserName>
             {showDropdown && (
               <DropdownMenu>
                 <DropdownItem onClick={handleProfileClick}>User Profile</DropdownItem>

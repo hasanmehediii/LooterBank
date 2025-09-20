@@ -1,9 +1,10 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import styled from 'styled-components';
 import { Link, Outlet } from 'react-router-dom';
 import Navbar from '../common/Navbar';
 import Footer from '../common/Footer';
 import { FaTachometerAlt, FaUniversity, FaExchangeAlt, FaPiggyBank, FaUserCircle } from 'react-icons/fa';
+import { AuthContext } from '../context/AuthContext';
 
 const UserHomeContainer = styled.div`
   display: flex;
@@ -66,7 +67,8 @@ const SidebarMenuItem = styled.li`
 const MainContent = styled.main`
   flex-grow: 1;
   padding: 2rem;
-  padding-top: 8rem;
+  padding-top: 6rem; /* Adjusted to match Navbar height */
+  overflow-x: hidden; /* Prevent horizontal overflow */
   background-image: url('/images/bank_background.jpg');
   background-repeat: no-repeat;
   background-position: right;
@@ -118,6 +120,8 @@ const MetricValue = styled.p`
 `;
 
 const UserHome = () => {
+  const { user } = useContext(AuthContext);
+
   return (
     <>
       <Navbar />
@@ -161,21 +165,21 @@ const UserHome = () => {
         </Sidebar>
         <MainContent>
           <WelcomeHeader>
-            <WelcomeTitle>Welcome back, User!</WelcomeTitle>
+            <WelcomeTitle>Welcome back, {user ? user.name : 'User'}!</WelcomeTitle>
             <WelcomeSubtitle>Here's a summary of your account.</WelcomeSubtitle>
           </WelcomeHeader>
           <MetricsContainer>
             <MetricCard>
               <MetricTitle>Current Balance</MetricTitle>
-              <MetricValue>$12,345.67</MetricValue>
+              <MetricValue>{user && user.account ? `${user.account.balance} ${user.account.currency}` : 'Loading...'}</MetricValue>
             </MetricCard>
             <MetricCard>
-              <MetricTitle>Total Deposits</MetricTitle>
-              <MetricValue>$5,000.00</MetricValue>
+              <MetricTitle>Account Number</MetricTitle>
+              <MetricValue>{user && user.account ? user.account.accountNumber : 'Loading...'}</MetricValue>
             </MetricCard>
             <MetricCard>
-              <MetricTitle>Total Withdrawals</MetricTitle>
-              <MetricValue>$1,234.56</MetricValue>
+              <MetricTitle>Account Type</MetricTitle>
+              <MetricValue>{user && user.account ? user.account.accountType : 'Loading...'}</MetricValue>
             </MetricCard>
           </MetricsContainer>
           <Outlet />

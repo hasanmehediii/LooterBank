@@ -48,6 +48,15 @@ const Input = styled.input`
   width: 100%;
 `;
 
+const Select = styled.select`
+  padding: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 1rem;
+  width: 100%;
+  background-color: white;
+`;
+
 const Button = styled.button`
   padding: 1rem;
   background-color: #007bff;
@@ -96,13 +105,13 @@ const SignUp = () => {
     password: '',
     password2: '',
     phone: '',
-    address: '',
-    dob: '',
+    accountType: 'savings',
+    initialBalance: 0,
   });
   const [error, setError] = useState('');
   const navigate = useNavigate();
 
-  const { name, email, password, password2, phone, address, dob } = formData;
+  const { name, email, password, password2, phone, accountType, initialBalance } = formData;
 
   const onChange = (e) =>
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -117,8 +126,8 @@ const SignUp = () => {
         email,
         password,
         phone,
-        address,
-        dob,
+        accountType,
+        initialBalance: parseFloat(initialBalance),
       };
 
       try {
@@ -130,11 +139,11 @@ const SignUp = () => {
 
         const body = JSON.stringify(newUser);
 
-        const res = await axios.post('http://localhost:5000/api/auth/register', body, config);
+        const res = await axios.post('http://localhost:5000/api/auth/signup', body, config);
 
-        console.log(res.data);
         localStorage.setItem('token', res.data.token);
-        navigate('/login');
+        alert(`Sign up successful! Your new account number is: ${res.data.accountNumber}`);
+        navigate('/home');
       } catch (err) {
         setError(err.response.data.msg);
       }
@@ -190,19 +199,17 @@ const SignUp = () => {
               value={phone}
               onChange={onChange}
             />
+            <Select name="accountType" value={accountType} onChange={onChange}>
+              <option value="savings">Savings</option>
+              <option value="checking">Checking</option>
+            </Select>
             <Input
-              type="text"
-              placeholder="Address"
-              name="address"
-              value={address}
+              type="number"
+              placeholder="Initial Balance"
+              name="initialBalance"
+              value={initialBalance}
               onChange={onChange}
-            />
-            <Input
-              type="date"
-              placeholder="Date of Birth"
-              name="dob"
-              value={dob}
-              onChange={onChange}
+              min="0"
             />
             <Button type="submit">Sign Up</Button>
             <LoginLink>

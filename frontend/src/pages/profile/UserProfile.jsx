@@ -78,16 +78,6 @@ const Input = styled.input`
   }
 `;
 
-const CheckboxGroup = styled.div`
-  display: flex;
-  align-items: center;
-  margin-top: 1rem;
-`;
-
-const Checkbox = styled.input`
-  margin-right: 0.5rem;
-`;
-
 const Button = styled.button`
   grid-column: 1 / -1;
   padding: 1rem;
@@ -122,12 +112,8 @@ const UserProfile = () => {
     name: '',
     email: '',
     phone: '',
-    address: '',
-    dob: '',
-    mfaEnabled: false,
-    roles: [],
+    role: '',
     status: '',
-    lastLogin: '',
     createdAt: '',
     updatedAt: '',
   });
@@ -147,20 +133,16 @@ const UserProfile = () => {
       try {
         const config = {
           headers: {
-            'x-auth-token': token,
+            'Authorization': `Bearer ${token}`,
           },
         };
-        const res = await axios.get('http://localhost:5000/api/users/me', config);
+        const res = await axios.get('http://localhost:5000/api/users/profile', config);
         setUserData({
           name: res.data.name,
           email: res.data.email,
-          phone: res.data.profile?.phone || '',
-          address: res.data.profile?.address || '',
-          dob: res.data.profile?.dob || '',
-          mfaEnabled: res.data.mfaEnabled,
-          roles: res.data.roles,
+          phone: res.data.phone || '',
+          role: res.data.role,
           status: res.data.status,
-          lastLogin: res.data.lastLogin ? new Date(res.data.lastLogin).toLocaleString() : 'N/A',
           createdAt: res.data.createdAt ? new Date(res.data.createdAt).toLocaleString() : 'N/A',
           updatedAt: res.data.updatedAt ? new Date(res.data.updatedAt).toLocaleString() : 'N/A',
         });
@@ -180,10 +162,10 @@ const UserProfile = () => {
   }, [navigate]);
 
   const handleChange = (e) => {
-    const { name, value, type, checked } = e.target;
+    const { name, value } = e.target;
     setUserData((prevData) => ({
       ...prevData,
-      [name]: type === 'checkbox' ? checked : value,
+      [name]: value,
     }));
   };
 
@@ -201,21 +183,16 @@ const UserProfile = () => {
     try {
       const config = {
         headers: {
-          'x-auth-token': token,
+          'Authorization': `Bearer ${token}`,
           'Content-Type': 'application/json',
         },
       };
       const updateData = {
         name: userData.name,
         email: userData.email,
-        mfaEnabled: userData.mfaEnabled,
-        profile: {
-          phone: userData.phone,
-          address: userData.address,
-          dob: userData.dob,
-        },
+        phone: userData.phone,
       };
-      await axios.put('http://localhost:5000/api/users/me', updateData, config);
+      await axios.put('http://localhost:5000/api/users/profile', updateData, config);
       setSuccess('Profile updated successfully!');
     } catch (err) {
       console.error('Error updating user profile:', err);
@@ -279,49 +256,12 @@ const UserProfile = () => {
               />
             </FormGroup>
             <FormGroup>
-              <Label htmlFor="address">Address</Label>
-              <Input
-                type="text"
-                id="address"
-                name="address"
-                value={userData.address}
-                onChange={handleChange}
-              />
-            </FormGroup>
-            <FormGroup>
-              <Label htmlFor="dob">Date of Birth</Label>
-              <Input
-                type="date"
-                id="dob"
-                name="dob"
-                value={userData.dob}
-                onChange={handleChange}
-              />
-            </FormGroup>
-            <FormGroup>
-              <Label>MFA Enabled</Label>
-              <CheckboxGroup>
-                <Checkbox
-                  type="checkbox"
-                  id="mfaEnabled"
-                  name="mfaEnabled"
-                  checked={userData.mfaEnabled}
-                  onChange={handleChange}
-                />
-                <Label htmlFor="mfaEnabled">Enable Multi-Factor Authentication</Label>
-              </CheckboxGroup>
-            </FormGroup>
-            <FormGroup>
-              <Label>Roles</Label>
-              <Input type="text" value={userData.roles.join(', ')} disabled />
+              <Label>Role</Label>
+              <Input type="text" value={userData.role} disabled />
             </FormGroup>
             <FormGroup>
               <Label>Account Status</Label>
               <Input type="text" value={userData.status} disabled />
-            </FormGroup>
-            <FormGroup>
-              <Label>Last Login</Label>
-              <Input type="text" value={userData.lastLogin} disabled />
             </FormGroup>
             <FormGroup>
               <Label>Member Since</Label>
