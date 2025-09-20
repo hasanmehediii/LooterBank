@@ -7,7 +7,7 @@ const app = express();
 // Connect to database
 connectDB();
 
-const allowedOrigins = ['http://localhost:3000', 'looter-bank-472gv7p05-mehedi-hasans-projects-1f9ebc78.vercel.app', 'looter-bank.vercel.app'];
+const allowedOrigins = ['http://localhost:3000', 'https://looter-bank-apft-gylsnvnst-mehedi-hasans-projects-1f9ebc78.vercel.app/', 'looter-bank.vercel.app'];
 
 const options = {
   origin: allowedOrigins
