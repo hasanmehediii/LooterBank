@@ -12,7 +12,7 @@ export const AuthProvider = ({ children }) => {
   const fetchUser = useCallback(async (authToken) => {
     setLoading(true);
     try {
-      const res = await axios.get('http://localhost:5000/api/auth/me', {
+      const res = await axios.get('https://backend-bufdzp23c-mehedi-hasans-projects-1f9ebc78.vercel.app/api/auth/me', {
         headers: {
           'x-auth-token': authToken, // ✅ must match backend middleware
         },
@@ -48,7 +48,7 @@ export const AuthProvider = ({ children }) => {
   // Login function
   const login = async ({ identifier, accountNumber, password }) => {
     try {
-      const res = await axios.post('http://localhost:5000/api/auth/login', {
+      const res = await axios.post('https://backend-bufdzp23c-mehedi-hasans-projects-1f9ebc78.vercel.app/api/auth/login', {
         identifier,
         accountNumber,
         password,

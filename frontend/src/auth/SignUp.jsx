@@ -139,7 +139,7 @@ const SignUp = () => {
 
         const body = JSON.stringify(newUser);
 
-        const res = await axios.post('http://localhost:5000/api/auth/signup', body, config);
+        const res = await axios.post('https://backend-bufdzp23c-mehedi-hasans-projects-1f9ebc78.vercel.app/api/auth/signup', body, config);
 
         localStorage.setItem('token', res.data.token);
         alert(`Sign up successful! Your new account number is: ${res.data.accountNumber}`);

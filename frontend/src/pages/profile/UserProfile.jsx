@@ -136,7 +136,7 @@ const UserProfile = () => {
             'x-auth-token': token,
           },
         };
-        const res = await axios.get('http://localhost:5000/api/auth/me', config);
+        const res = await axios.get('https://backend-bufdzp23c-mehedi-hasans-projects-1f9ebc78.vercel.app/api/auth/me', config);
         setUserData({
           name: res.data.name,
           email: res.data.email,
@@ -192,7 +192,7 @@ const UserProfile = () => {
         email: userData.email,
         phone: userData.phone,
       };
-      await axios.put('http://localhost:5000/api/auth/me', updateData, config);
+      await axios.put('https://backend-bufdzp23c-mehedi-hasans-projects-1f9ebc78.vercel.app/api/auth/me', updateData, config);
       setSuccess('Profile updated successfully!');
     } catch (err) {
       console.error('Error updating user profile:', err);
