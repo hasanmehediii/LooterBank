@@ -10,7 +10,7 @@ connectDB();
 // Init Middleware
 const cors = require('cors');
 
-const allowedOrigins = ['http://localhost:3000', 'https://looterbank.vercel.app'];
+const allowedOrigins = ['http://localhost:3000', 'https://backend-g0d7phgm7-mehedi-hasans-projects-1f9ebc78.vercel.app'];
 
 const options = {
   origin: allowedOrigins
