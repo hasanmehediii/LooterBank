@@ -139,7 +139,7 @@ const SignUp = () => {
 
         const body = JSON.stringify(newUser);
 
-        const res = await axios.post('https://backend-g0d7phgm7-mehedi-hasans-projects-1f9ebc78.vercel.app/api/auth/signup', body, config);
+        const res = await axios.post('looter-bank-472gv7p05-mehedi-hasans-projects-1f9ebc78.vercel.app/api/auth/signup', body, config);
 
         localStorage.setItem('token', res.data.token);
         alert(`Sign up successful! Your new account number is: ${res.data.accountNumber}`);
