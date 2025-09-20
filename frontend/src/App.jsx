@@ -1,5 +1,5 @@
-import React from 'react';
-import { Routes, Route } from 'react-router-dom';
+import React, { useContext } from 'react';
+import { Routes, Route, Navigate } from 'react-router-dom';
 import styled from 'styled-components';
 import Welcome from './pages/Welcome';
 import Login from './auth/Login';
@@ -12,7 +12,7 @@ import UserProfile from './pages/profile/UserProfile';
 import Account from './pages/features/Account';
 import Transactions from './pages/features/Transactions';
 import LoanApply from './pages/features/LoanApply';
-import { AuthProvider } from './context/AuthContext';
+import { AuthProvider, AuthContext } from './context/AuthContext';
 
 const AppContainer = styled.div`
   min-height: 100vh;
@@ -23,6 +23,20 @@ const AppContainer = styled.div`
 const MainContent = styled.main`
   flex-grow: 1;
 `;
+
+const ProtectedRoute = ({ children }) => {
+  const { user, loading } = useContext(AuthContext);
+
+  if (loading) {
+    return <div>Loading...</div>;
+  }
+
+  if (!user) {
+    return <Navigate to="/login" />;
+  }
+
+  return children;
+};
 
 function App() {
   return (
@@ -36,11 +50,11 @@ function App() {
             <Route path="/faq" element={<FAQ />} />
             <Route path="/login" element={<Login />} />
             <Route path="/signup" element={<SignUp />} />
-            <Route path="/home" element={<UserHome />} />
-            <Route path="/user-profile" element={<UserProfile />} />
-            <Route path="/home/account" element={<Account />} />
-            <Route path="/home/transactions" element={<Transactions />} />
-            <Route path="/home/loan-apply" element={<LoanApply />} />
+            <Route path="/home" element={<ProtectedRoute><UserHome /></ProtectedRoute>} />
+            <Route path="/user-profile" element={<ProtectedRoute><UserProfile /></ProtectedRoute>} />
+            <Route path="/home/account" element={<ProtectedRoute><Account /></ProtectedRoute>} />
+            <Route path="/home/transactions" element={<ProtectedRoute><Transactions /></ProtectedRoute>} />
+            <Route path="/home/loan-apply" element={<ProtectedRoute><LoanApply /></ProtectedRoute>} />
           </Routes>
         </AuthProvider>
       </MainContent>

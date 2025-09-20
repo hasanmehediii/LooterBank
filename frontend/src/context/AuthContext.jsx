@@ -6,9 +6,11 @@ export const AuthContext = createContext();
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [token, setToken] = useState(null);
+  const [loading, setLoading] = useState(true);
 
   // Fetch user info using token (used on page reload)
   const fetchUser = useCallback(async (authToken) => {
+    setLoading(true);
     try {
       const res = await axios.get('http://localhost:5000/api/auth/me', {
         headers: {
@@ -21,15 +23,25 @@ export const AuthProvider = ({ children }) => {
       setUser(null);
       setToken(null);
       localStorage.removeItem('token');
+    } finally {
+      setLoading(false);
     }
   }, []);
 
-  // Load token from localStorage on app start
+  // Load token and user from localStorage on app start
   useEffect(() => {
     const storedToken = localStorage.getItem('token');
-    if (storedToken) {
+    const storedUser = localStorage.getItem('user');
+
+    if (storedToken && storedUser) {
       setToken(storedToken);
+      setUser(JSON.parse(storedUser));
+      setLoading(false);
+    } else if (storedToken) {
+      // If only token is present, fetch user data
       fetchUser(storedToken);
+    } else {
+      setLoading(false);
     }
   }, [fetchUser]);
 
@@ -45,11 +57,10 @@ export const AuthProvider = ({ children }) => {
       const newToken = res.data.token;
       const loggedInUser = res.data.user;
 
-      // Save token in state and localStorage
+      // Save token and user in state and localStorage
       localStorage.setItem('token', newToken);
+      localStorage.setItem('user', JSON.stringify(loggedInUser));
       setToken(newToken);
-
-      // Save user in state
       setUser(loggedInUser);
 
       return true;
@@ -67,7 +78,7 @@ export const AuthProvider = ({ children }) => {
   };
 
   return (
-    <AuthContext.Provider value={{ user, token, login, logout }}>
+    <AuthContext.Provider value={{ user, token, loading, login, logout }}>
       {children}
     </AuthContext.Provider>
   );

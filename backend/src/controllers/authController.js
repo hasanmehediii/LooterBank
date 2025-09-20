@@ -138,3 +138,28 @@ exports.getMe = async (req, res) => {
     res.status(500).send('Server error');
   }
 };
+
+// ======================= UPDATE ME =======================
+exports.updateMe = async (req, res) => {
+  const { name, email, phone } = req.body;
+
+  try {
+    const user = await User.findById(req.user.id);
+
+    if (!user) {
+      return res.status(404).json({ msg: 'User not found' });
+    }
+
+    // Update user fields
+    user.name = name || user.name;
+    user.email = email || user.email;
+    user.phone = phone || user.phone;
+
+    await user.save();
+
+    res.json(user);
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send('Server error');
+  }
+};

@@ -111,12 +111,13 @@ const Navbar = () => {
       <Logo to="/">LooterBank</Logo>
       <div style={{ display: 'flex', alignItems: 'center' }}>
         <NavLink to="/">Home</NavLink>
+        {user && <NavLink to="/home">Dashboard</NavLink>}
         <NavLink to="/about">About Us</NavLink>
         <NavLink to="/contact">Contact</NavLink>
         <NavLink to="/faq">FAQ</NavLink>
         {user ? (
-          <UserMenu onClick={() => setShowDropdown(!showDropdown)}>
-            <UserName>{user.name}</UserName>
+          <UserMenu>
+            <UserName onClick={() => setShowDropdown(!showDropdown)}>{user.name}</UserName>
             {showDropdown && (
               <DropdownMenu>
                 <DropdownItem onClick={handleProfileClick}>User Profile</DropdownItem>

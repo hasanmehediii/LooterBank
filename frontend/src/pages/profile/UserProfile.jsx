@@ -133,10 +133,10 @@ const UserProfile = () => {
       try {
         const config = {
           headers: {
-            'Authorization': `Bearer ${token}`,
+            'x-auth-token': token,
           },
         };
-        const res = await axios.get('http://localhost:5000/api/users/profile', config);
+        const res = await axios.get('http://localhost:5000/api/auth/me', config);
         setUserData({
           name: res.data.name,
           email: res.data.email,
@@ -183,7 +183,7 @@ const UserProfile = () => {
     try {
       const config = {
         headers: {
-          'Authorization': `Bearer ${token}`,
+          'x-auth-token': token,
           'Content-Type': 'application/json',
         },
       };
@@ -192,7 +192,7 @@ const UserProfile = () => {
         email: userData.email,
         phone: userData.phone,
       };
-      await axios.put('http://localhost:5000/api/users/profile', updateData, config);
+      await axios.put('http://localhost:5000/api/auth/me', updateData, config);
       setSuccess('Profile updated successfully!');
     } catch (err) {
       console.error('Error updating user profile:', err);
