@@ -136,7 +136,7 @@ const UserProfile = () => {
             'x-auth-token': token,
           },
         };
-        const res = await API.get('/auth/me', config);
+        const res = await API.get('/api/auth/me', config);
         setUserData({
           name: res.data.name,
           email: res.data.email,
