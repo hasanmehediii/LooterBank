@@ -9,7 +9,7 @@ app.use(express.static(path.join(__dirname, '../public')));
 // Connect to database
 connectDB();
 
-const allowedOrigins = ['http://localhost:3000', 'https://looter-bank-apft-gylsnvnst-mehedi-hasans-projects-1f9ebc78.vercel.app/', 'https://looter-bank-apft.vercel.app'];
+const allowedOrigins = ['http://localhost:3000', 'http://localhost:5173', 'https://looter-bank-apft-gylsnvnst-mehedi-hasans-projects-1f9ebc78.vercel.app/', 'https://looter-bank-apft.vercel.app', 'https://looter-bank-apft-i61dgsvyu-mehedi-hasans-projects-1f9ebc78.vercel.app'];
 
 const options = {
   origin: allowedOrigins

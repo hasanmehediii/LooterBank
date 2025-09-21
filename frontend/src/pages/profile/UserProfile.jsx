@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import Navbar from '../../common/Navbar';
 import Footer from '../../common/Footer';
-import axios from 'axios';
+import API from '../../connection/api';
 import { useNavigate } from 'react-router-dom';
 
 const PageContainer = styled.div`
@@ -136,7 +136,7 @@ const UserProfile = () => {
             'x-auth-token': token,
           },
         };
-        const res = await axios.get('https://looter-bank-apft-gylsnvnst-mehedi-hasans-projects-1f9ebc78.vercel.app//api/auth/me', config);
+        const res = await API.get('/auth/me', config);
         setUserData({
           name: res.data.name,
           email: res.data.email,
@@ -192,7 +192,7 @@ const UserProfile = () => {
         email: userData.email,
         phone: userData.phone,
       };
-      await axios.put('https://looter-bank-apft-gylsnvnst-mehedi-hasans-projects-1f9ebc78.vercel.app//api/auth/me', updateData, config);
+      await API.put('/auth/me', updateData, config);
       setSuccess('Profile updated successfully!');
     } catch (err) {
       console.error('Error updating user profile:', err);

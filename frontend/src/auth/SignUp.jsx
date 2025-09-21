@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import axios from 'axios';
+import API from '../connection/api';
 import { useNavigate, Link } from 'react-router-dom';
 import Navbar from '../common/Navbar';
 import Footer from '../common/Footer';
@@ -139,7 +139,7 @@ const SignUp = () => {
 
         const body = JSON.stringify(newUser);
 
-        const res = await axios.post('https://looter-bank-apft-gylsnvnst-mehedi-hasans-projects-1f9ebc78.vercel.app//api/auth/signup', body, config);
+        const res = await API.post('/auth/signup', body, config);
 
         localStorage.setItem('token', res.data.token);
         alert(`Sign up successful! Your new account number is: ${res.data.accountNumber}`);
