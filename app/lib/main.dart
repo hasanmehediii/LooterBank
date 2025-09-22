@@ -1,13 +1,13 @@
 import 'dart:io';
-import 'package:app/http_overrides.dart';
+
 import 'package:flutter/material.dart';
 import 'package:app/splash_screen.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  HttpOverrides.global = MyHttpOverrides();
-  await dotenv.load(fileName: "dotenv");
+  
+  await dotenv.load(fileName: "assets/dotenv");
   runApp(const MyApp());
 }
 
