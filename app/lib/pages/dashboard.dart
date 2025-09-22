@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:app/pages/profile.dart';
 import 'package:app/common/footer.dart';
+import 'package:app/auth/login.dart';
 
 class DashboardScreen extends StatefulWidget {
   final Map<String, dynamic> user;
@@ -12,6 +13,7 @@ class DashboardScreen extends StatefulWidget {
 
 class _DashboardScreenState extends State<DashboardScreen> {
   int _selectedIndex = 0;
+  String _title = 'Dashboard';
 
   late final List<Widget> _widgetOptions;
 
@@ -29,6 +31,20 @@ class _DashboardScreenState extends State<DashboardScreen> {
   void _onItemTapped(int index) {
     setState(() {
       _selectedIndex = index;
+      switch (index) {
+        case 0:
+          _title = 'Dashboard';
+          break;
+        case 1:
+          _title = 'Transactions';
+          break;
+        case 2:
+          _title = 'Loans';
+          break;
+        case 3:
+          _title = 'Profile';
+          break;
+      }
     });
   }
 
@@ -36,7 +52,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Dashboard'),
+        title: Text(_title),
         actions: [
           IconButton(
             icon: const Icon(Icons.notifications),
@@ -72,12 +88,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
               title: const Text('Profile'),
               onTap: () {
                 Navigator.pop(context);
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => ProfileScreen(user: widget.user),
-                  ),
-                );
+                _onItemTapped(3);
               },
             ),
             ListTile(
@@ -113,7 +124,10 @@ class _DashboardScreenState extends State<DashboardScreen> {
               leading: const Icon(Icons.logout),
               title: const Text('Logout'),
               onTap: () {
-                // Implement logout functionality
+                Navigator.of(context).pushAndRemoveUntil(
+                  MaterialPageRoute(builder: (context) => const LoginScreen()),
+                  (Route<dynamic> route) => false,
+                );
               },
             ),
           ],
