@@ -2,7 +2,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter_dotenv/flutter_dotenv.dart';
-import 'package:app/pages/home.dart';
+import 'package:app/pages/dashboard.dart';
 import '../common/footer.dart';
 import 'signup.dart'; // Import the signup screen
 
@@ -42,9 +42,11 @@ class _LoginScreenState extends State<LoginScreen> {
 
       if (response.statusCode == 200) {
         if (!mounted) return;
+        final data = json.decode(response.body);
+        final user = data['user'];
         // Navigate to home screen
         Navigator.of(context).pushReplacement(
-          MaterialPageRoute(builder: (context) => const HomeScreen()),
+          MaterialPageRoute(builder: (context) => DashboardScreen(user: user)),
         );
       } else {
         if (!mounted) return;

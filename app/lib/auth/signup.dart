@@ -1,8 +1,8 @@
 import 'dart:convert';
+import 'package:app/pages/dashboard.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter_dotenv/flutter_dotenv.dart';
-import 'package:app/pages/home.dart';
 import '../common/footer.dart';
 
 class SignUpScreen extends StatefulWidget {
@@ -46,7 +46,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
           'password': _passwordController.text,
           'phone': _phoneController.text,
           'accountType': _accountType,
-          'initialBalance': double.tryParse(_initialBalanceController.text) ?? 0,
+          'initialBalance':
+              double.tryParse(_initialBalanceController.text) ?? 0,
         }),
       );
 
@@ -55,10 +56,16 @@ class _SignUpScreenState extends State<SignUpScreen> {
       if (response.statusCode == 200) {
         if (!mounted) return;
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('Sign up successful! Your new account number is: ${responseData['accountNumber']}')),
+          SnackBar(
+            content: Text(
+              'Sign up successful! Your new account number is: ${responseData['accountNumber']}',
+            ),
+          ),
         );
         Navigator.of(context).pushReplacement(
-          MaterialPageRoute(builder: (context) => const HomeScreen()),
+          MaterialPageRoute(
+            builder: (context) => DashboardHome(user: responseData['user']),
+          ),
         );
       } else {
         if (!mounted) return;
@@ -68,9 +75,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
       }
     } catch (e) {
       if (!mounted) return;
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('An error occurred: $e')),
-      );
+      ScaffoldMessenger.of(
+        context,
+      ).showSnackBar(SnackBar(content: Text('An error occurred: $e')));
     }
 
     setState(() {
@@ -109,7 +116,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     const SizedBox(height: 40),
                     Text(
                       "Join LooterBank Today",
-                      style: Theme.of(context).textTheme.headlineMedium?.copyWith(
+                      style: Theme.of(context).textTheme.headlineMedium
+                          ?.copyWith(
                             color: const Color.fromARGB(255, 2, 0, 0),
                             fontWeight: FontWeight.bold,
                           ),
@@ -148,7 +156,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         labelText: 'Password',
                         suffixIcon: IconButton(
                           icon: Icon(
-                            _obscurePassword ? Icons.visibility_off : Icons.visibility,
+                            _obscurePassword
+                                ? Icons.visibility_off
+                                : Icons.visibility,
                           ),
                           onPressed: () {
                             setState(() {
@@ -175,7 +185,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         labelText: 'Confirm Password',
                         suffixIcon: IconButton(
                           icon: Icon(
-                            _obscurePassword2 ? Icons.visibility_off : Icons.visibility,
+                            _obscurePassword2
+                                ? Icons.visibility_off
+                                : Icons.visibility,
                           ),
                           onPressed: () {
                             setState(() {
@@ -197,18 +209,24 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     const SizedBox(height: 16),
                     TextFormField(
                       controller: _phoneController,
-                      decoration: const InputDecoration(labelText: 'Phone Number'),
+                      decoration: const InputDecoration(
+                        labelText: 'Phone Number',
+                      ),
                       keyboardType: TextInputType.phone,
                     ),
                     const SizedBox(height: 16),
                     DropdownButtonFormField<String>(
                       value: _accountType,
-                      decoration: const InputDecoration(labelText: 'Account Type'),
+                      decoration: const InputDecoration(
+                        labelText: 'Account Type',
+                      ),
                       items: ['savings', 'checking']
-                          .map((label) => DropdownMenuItem(
-                                child: Text(label),
-                                value: label,
-                              ))
+                          .map(
+                            (label) => DropdownMenuItem(
+                              child: Text(label),
+                              value: label,
+                            ),
+                          )
                           .toList(),
                       onChanged: (value) {
                         setState(() {
@@ -219,7 +237,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     const SizedBox(height: 16),
                     TextFormField(
                       controller: _initialBalanceController,
-                      decoration: const InputDecoration(labelText: 'Initial Balance'),
+                      decoration: const InputDecoration(
+                        labelText: 'Initial Balance',
+                      ),
                       keyboardType: TextInputType.number,
                       validator: (value) {
                         if (value != null && value.isNotEmpty) {

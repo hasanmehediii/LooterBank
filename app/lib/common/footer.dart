@@ -6,83 +6,64 @@ class Footer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: Colors.black87,
-      padding: const EdgeInsets.symmetric(vertical: 40, horizontal: 20),
+      color: const Color(0xFF1A3C6E),
+      padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 40),
       child: Column(
         children: [
-          // Top Sections
-          Wrap(
-            spacing: 40,
-            runSpacing: 40,
-            alignment: WrapAlignment.center,
-            children: const [
-              _FooterSection(
-                title: "About Us",
-                text:
-                    "LooterBank is a leading financial institution committed to providing the best banking services to our customers.",
-              ),
-              _FooterSection(
-                title: "Quick Links",
-                text: "About Us\nContact\nFAQ",
-              ),
-              _FooterSection(
-                title: "Contact Us",
-                text: "Email: support@looterbank.com\nPhone: (123) 456-7890",
-              ),
-              _FooterSection(
-                title: "Follow Us",
-                text: "Facebook • Twitter • LinkedIn",
-              ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: [
+              _buildFooterColumn(context, 'About Us', [
+                'Our Story',
+                'Careers',
+                'Press',
+              ]),
+              _buildFooterColumn(context, 'Support', [
+                'Contact Us',
+                'FAQ',
+                'Help Center',
+              ]),
+              _buildFooterColumn(context, 'Legal', [
+                'Privacy Policy',
+                'Terms of Service',
+                'Cookie Policy',
+              ]),
             ],
           ),
-
-          const SizedBox(height: 30),
-          const Divider(color: Colors.white30),
-          const SizedBox(height: 10),
-
-          // Bottom Section
-          Text(
-            "© 2025 LooterBank. All rights reserved.",
-            style: Theme.of(
-              context,
-            ).textTheme.bodySmall?.copyWith(color: Colors.white70),
-            textAlign: TextAlign.center,
+          const SizedBox(height: 20),
+          const Divider(color: Colors.white54),
+          const SizedBox(height: 20),
+          const Text(
+            '© 2025 LooterBank. All Rights Reserved.',
+            style: TextStyle(color: Colors.white70),
           ),
         ],
       ),
     );
   }
-}
 
-class _FooterSection extends StatelessWidget {
-  final String title;
-  final String text;
-
-  const _FooterSection({required this.title, required this.text});
-
-  @override
-  Widget build(BuildContext context) {
-    return SizedBox(
-      width: 240,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            title,
-            style: Theme.of(context).textTheme.titleLarge?.copyWith(
-              color: Colors.white,
-              fontWeight: FontWeight.bold,
+  Widget _buildFooterColumn(BuildContext context, String title, List<String> items) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          title,
+          style: const TextStyle(
+            color: Colors.white,
+            fontWeight: FontWeight.bold,
+            fontSize: 16,
+          ),
+        ),
+        const SizedBox(height: 10),
+        for (final item in items)
+          Padding(
+            padding: const EdgeInsets.symmetric(vertical: 4.0),
+            child: Text(
+              item,
+              style: const TextStyle(color: Colors.white70),
             ),
           ),
-          const SizedBox(height: 12),
-          Text(
-            text,
-            style: Theme.of(
-              context,
-            ).textTheme.bodyMedium?.copyWith(color: Colors.white70),
-          ),
-        ],
-      ),
+      ],
     );
   }
 }
