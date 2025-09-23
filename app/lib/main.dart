@@ -1,5 +1,11 @@
-import 'dart:io';
-
+import 'package:app/utils/AboutUs.dart';
+import 'package:app/utils/ContactUs.dart';
+import 'package:app/utils/CookiePolicy.dart';
+import 'package:app/utils/FAQ.dart';
+import 'package:app/utils/OurStory.dart';
+import 'package:app/utils/PrivacyPolicy.dart';
+import 'package:app/utils/Support.dart';
+import 'package:app/utils/TermsOfService.dart';
 import 'package:flutter/material.dart';
 import 'package:app/splash_screen.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
@@ -52,6 +58,16 @@ class MyApp extends StatelessWidget {
         ),
       ),
       home: const SplashScreen(),
+      routes: {
+        '/about': (context) => const AboutUsScreen(),
+        '/contact': (context) => const ContactUsScreen(),
+        '/cookie-policy': (context) => const CookiePolicyScreen(),
+        '/faq': (context) => const FAQScreen(),
+        '/our-story': (context) => const OurStoryScreen(),
+        '/privacy-policy': (context) => const PrivacyPolicyScreen(),
+        '/support': (context) => const SupportScreen(),
+        '/terms-of-service': (context) => const TermsOfServiceScreen(),
+      },
       debugShowCheckedModeBanner: false,
     );
   }
