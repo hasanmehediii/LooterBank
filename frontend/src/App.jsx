@@ -9,7 +9,9 @@ import Contact from './pages/Contact';
 import FAQ from './pages/FAQ';
 import UserHome from './pages/UserHome';
 import UserProfile from './pages/profile/UserProfile';
-import Account from './pages/features/Account';
+import Deposit from './pages/features/Deposit';
+import SendMoney from './pages/features/SendMoney';
+import Cashout from './pages/features/Cashout';
 import Transactions from './pages/features/Transactions';
 import LoanApply from './pages/features/LoanApply';
 import { AuthProvider, AuthContext } from './context/AuthContext';
@@ -52,9 +54,12 @@ function App() {
             <Route path="/signup" element={<SignUp />} />
             <Route path="/home" element={<ProtectedRoute><UserHome /></ProtectedRoute>} />
             <Route path="/user-profile" element={<ProtectedRoute><UserProfile /></ProtectedRoute>} />
-            <Route path="/home/account" element={<ProtectedRoute><Account /></ProtectedRoute>} />
             <Route path="/home/transactions" element={<ProtectedRoute><Transactions /></ProtectedRoute>} />
             <Route path="/home/loan-apply" element={<ProtectedRoute><LoanApply /></ProtectedRoute>} />
+            <Route path="/home/deposit" element={<ProtectedRoute><Deposit /></ProtectedRoute>} />
+            <Route path="/home/send-money" element={<ProtectedRoute><SendMoney /></ProtectedRoute>} />
+            <Route path="/home/cashout" element={<ProtectedRoute><Cashout /></ProtectedRoute>} />
+            <Route path="*" element={<Navigate to="/" />} />
           </Routes>
         </AuthProvider>
       </MainContent>

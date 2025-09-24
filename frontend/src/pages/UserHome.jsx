@@ -2,6 +2,11 @@ import React, { useContext } from 'react';
 import styled from 'styled-components';
 import { Link, Outlet } from 'react-router-dom';
 import Navbar from '../common/Navbar';
+import Transactions from './features/Transactions';
+import LoanApply from './features/LoanApply';
+import Deposit from './features/Deposit';
+import SendMoney from './features/SendMoney';
+import Cashout from './features/Cashout';
 import Footer from '../common/Footer';
 import { FaTachometerAlt, FaUniversity, FaExchangeAlt, FaPiggyBank, FaUserCircle } from 'react-icons/fa';
 import { AuthContext } from '../context/AuthContext';
@@ -79,9 +84,29 @@ const MainContent = styled.main`
   flex-grow: 1;
   padding: 6rem 3rem 3rem 3rem;
   min-height: 100vh;
-  background: linear-gradient(180deg, #e9f0ff 0%, #ffffff 100%);
+
+  /* Fixed background image */
+  background: url('/images/money.jpg') no-repeat center right;
+  background-size: cover;
+  background-attachment: fixed;
+
+  /* White overlay effect */
+  position: relative;
+  z-index: 1;
   overflow-x: hidden;
+
+  &::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(255, 255, 255, 0.8); /* adjust opacity */
+    z-index: -1;
+  }
 `;
+
 
 const WelcomeHeader = styled.div`
   margin-bottom: 2.5rem;
@@ -152,23 +177,28 @@ const UserHome = () => {
               </Link>
             </SidebarMenuItem>
             <SidebarMenuItem>
-              <Link to="/home/account">
-                <FaUniversity /> Accounts
-              </Link>
-            </SidebarMenuItem>
-            <SidebarMenuItem>
               <Link to="/home/transactions">
                 <FaExchangeAlt /> Transactions
               </Link>
             </SidebarMenuItem>
             <SidebarMenuItem>
               <Link to="/home/loan-apply">
-                <FaPiggyBank /> Loans
+                <FaPiggyBank /> Apply for Loan
               </Link>
             </SidebarMenuItem>
             <SidebarMenuItem>
-              <Link to="/user-profile">
-                <FaUserCircle /> Profile
+              <Link to="/home/cashout">
+                <FaPiggyBank /> Cashout
+              </Link>
+            </SidebarMenuItem>
+            <SidebarMenuItem>
+              <Link to="/home/deposit">
+                <FaPiggyBank /> Deposit
+              </Link>
+            </SidebarMenuItem>
+            <SidebarMenuItem>
+              <Link to="/home/send-money">
+                <FaUserCircle /> Send Money
               </Link>
             </SidebarMenuItem>
           </SidebarMenu>

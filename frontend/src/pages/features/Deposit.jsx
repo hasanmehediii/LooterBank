@@ -14,19 +14,19 @@ const PageContainer = styled.div`
 
 const Section = styled.section`
   min-height: 100vh;
-  background: linear-gradient(rgba(255, 255, 255, 0.005), rgba(255, 245, 245, 0.05)),
-    url('/images/money.jpg'); /* put your image in public/images */
+  background: linear-gradient(rgba(255, 255, 255, 0.005), rgba(230, 248, 230, 0.05)),
+    url('/images/money.jpg'); 
   background-size: cover;
   background-position: center;
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
-  padding: 10rem 5rem 3rem;
+  align-items: flex-start; /* align content to left */
+  padding: 10rem 5rem 3rem; /* extra left padding */
 `;
 
 const Title = styled.h1`
   font-size: 2.5rem;
-  color: #222;
+  color: #222; 
   font-weight: 700;
   margin-bottom: 1rem;
   animation: ${fadeIn} 1s ease-out;
@@ -44,7 +44,7 @@ const Subtitle = styled.p`
 `;
 
 const Form = styled.form`
-  background: rgba(255, 255, 255, 0.95);
+  background: rgba(255, 255, 255, 0.95); /* semi-transparent background */
   padding: 2.5rem;
   padding-top: 3.5rem;
   border-radius: 1rem;
@@ -66,7 +66,7 @@ const Input = styled.input`
 const Button = styled.button`
   width: 100%;
   padding: 1rem;
-  background: #dc3545;
+  background: #28a745;
   color: white;
   font-size: 1.2rem;
   font-weight: 600;
@@ -76,24 +76,26 @@ const Button = styled.button`
   cursor: pointer;
 
   &:hover {
-    background: #a71d2a;
+    background: #1e7e34;
   }
 `;
 
-const Cashout = () => {
+const Deposit = () => {
   return (
     <PageContainer>
       <Navbar />
       <Section>
-        <Title>Cash Out</Title>
+        <Title>Deposit Money Request</Title>
         <Subtitle>
-          Enter the agent/ATM ID and the amount you wish to withdraw.
+          At first, get a receipt ID from our offline branch or ATM machine to
+          proceed with your deposit request.
         </Subtitle>
         <Form>
-          <Input type="text" placeholder="Agent/ATM ID" />
+          <Input type="text" placeholder="Account Number" />
+          <Input type="text" placeholder="Receipt ID" />
           <Input type="number" placeholder="Amount" />
           <Input type="text" placeholder="Password" />
-          <Button type="submit">Cash Out</Button>
+          <Button type="submit">Deposit</Button>
         </Form>
       </Section>
       <Footer />
@@ -101,4 +103,4 @@ const Cashout = () => {
   );
 };
 
-export default Cashout;
+export default Deposit;
