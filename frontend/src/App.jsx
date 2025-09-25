@@ -15,6 +15,7 @@ import Cashout from './pages/features/Cashout';
 import Transactions from './pages/features/Transactions';
 import LoanApply from './pages/features/LoanApply';
 import { AuthProvider, AuthContext } from './context/AuthContext';
+import './App.css';
 
 const AppContainer = styled.div`
   min-height: 100vh;
