@@ -14,6 +14,7 @@ import SendMoney from './pages/features/SendMoney';
 import Cashout from './pages/features/Cashout';
 import Transactions from './pages/features/Transactions';
 import LoanApply from './pages/features/LoanApply';
+import AdminHome from './admin/AdminHome';
 import { AuthProvider, AuthContext } from './context/AuthContext';
 import './App.css';
 
@@ -60,6 +61,7 @@ function App() {
             <Route path="/home/deposit" element={<ProtectedRoute><Deposit /></ProtectedRoute>} />
             <Route path="/home/send-money" element={<ProtectedRoute><SendMoney /></ProtectedRoute>} />
             <Route path="/home/cashout" element={<ProtectedRoute><Cashout /></ProtectedRoute>} />
+            <Route path="/admin" element={<AdminHome />} />
             <Route path="*" element={<Navigate to="/" />} />
           </Routes>
         </AuthProvider>

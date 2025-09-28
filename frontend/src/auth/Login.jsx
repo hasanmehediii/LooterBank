@@ -142,6 +142,15 @@ const Login = () => {
     e.preventDefault();
     setError('');
 
+    if (role === 'admin') {
+      if (identifier === 'admin@looter.com' && password === 'admin1234') {
+        navigate('/admin');
+      } else {
+        setError('Invalid admin credentials.');
+      }
+      return;
+    }
+
     try {
       // For user, include accountNumber; for admin, omit it
       const success = await login({
