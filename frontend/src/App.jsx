@@ -16,6 +16,11 @@ import Transactions from './pages/features/Transactions';
 import LoanApply from './pages/features/LoanApply';
 import AdminHome from './admin/AdminHome';
 import { AuthProvider, AuthContext } from './context/AuthContext';
+import AdminLayout from './admin/AdminLayout';
+import ManageUser from './admin/activities/ManageUser';
+import AdminDashboard from './admin/activities/Dashboard';
+import AdminTransactions from './admin/activities/Transactions';
+import AdminSettings from './admin/activities/Settings';
 import './App.css';
 
 const AppContainer = styled.div`
@@ -61,7 +66,15 @@ function App() {
             <Route path="/home/deposit" element={<ProtectedRoute><Deposit /></ProtectedRoute>} />
             <Route path="/home/send-money" element={<ProtectedRoute><SendMoney /></ProtectedRoute>} />
             <Route path="/home/cashout" element={<ProtectedRoute><Cashout /></ProtectedRoute>} />
-            <Route path="/admin" element={<AdminHome />} />
+
+
+            <Route path="/admin" element={<AdminLayout />}>
+              <Route index element={<AdminHome />} />
+              <Route path="dashboard" element={<AdminDashboard />} />
+              <Route path="users" element={<ManageUser />} />
+              <Route path="transactions" element={<AdminTransactions />} />
+              <Route path="settings" element={<AdminSettings />} />
+            </Route>
             <Route path="*" element={<Navigate to="/" />} />
           </Routes>
         </AuthProvider>

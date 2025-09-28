@@ -37,7 +37,11 @@ exports.updateUserProfile = async (req, res) => {
 exports.getAllUsers = async (req, res) => {
   try {
     const users = await User.find().select('-passwordHash');
-    res.json(users);
+    const usersWithAccounts = await Promise.all(users.map(async (user) => {
+      const accounts = await Account.find({ userId: user._id });
+      return { ...user.toObject(), accounts };
+    }));
+    res.json(usersWithAccounts);
   } catch (err) {
     console.error(err.message);
     res.status(500).send('Server Error');

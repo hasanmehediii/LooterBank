@@ -47,10 +47,10 @@ const Navbar = () => {
     <NavbarContainer>
       <Logo>LooterBank Admin</Logo>
       <NavLinks>
-        <NavLink>Users</NavLink>
-        <NavLink>Branches</NavLink>
-        <NavLink>Loan Review</NavLink>
-        <NavLink>Deposit Req</NavLink>
+        <NavLink onClick={() => navigate('/admin/dashboard')}>Dashboard</NavLink>
+        <NavLink onClick={() => navigate('/admin/users')}>Users</NavLink>
+        <NavLink onClick={() => navigate('/admin/transactions')}>Transactions</NavLink>
+        <NavLink onClick={() => navigate('/admin/settings')}>Settings</NavLink>
         <NavLink onClick={handleLogout}>Logout</NavLink>
       </NavLinks>
     </NavbarContainer>

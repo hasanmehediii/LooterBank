@@ -56,7 +56,7 @@ const AdminHome = () => {
   return (
     <AdminHomeContainer>
       <MainContent>
-        <Navbar />
+        
         <Header>
           <h1>Admin Dashboard</h1>
           <p>Welcome back, Admin! Here's a summary of your application.</p>
