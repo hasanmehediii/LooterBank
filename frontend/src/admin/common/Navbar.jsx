@@ -1,0 +1,54 @@
+import React from 'react';
+import styled from 'styled-components';
+
+const NavbarContainer = styled.nav`
+  width: 100%;
+  background: #222;
+  padding: 1rem 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+`;
+
+const Logo = styled.div`
+  color: #fff;
+  font-size: 1.5rem;
+  font-weight: bold;
+`;
+
+const NavLinks = styled.div`
+  display: flex;
+  gap: 2rem;
+`;
+
+const NavLink = styled.button`
+  background: none;
+  border: none;
+  color: #fff;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: color 0.2s;
+  &:hover {
+    color: #ffd700;
+  }
+`;
+
+const handleLogout = () => {
+    logout();
+    navigate('/login');
+};
+
+const Navbar = ({ onLogout }) => (
+  <NavbarContainer>
+    <Logo>LooterBank Admin</Logo>
+    <NavLinks>
+      <NavLink>Users</NavLink>
+      <NavLink>Branches</NavLink>
+      <NavLink>Loan Review</NavLink>
+      <NavLink>Deposit Req</NavLink>
+      <NavLink onClick={handleLogout}>Logout</NavLink>
+    </NavLinks>
+  </NavbarContainer>
+);
+
+export default Navbar;
