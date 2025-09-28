@@ -33,22 +33,28 @@ const NavLink = styled.button`
   }
 `;
 
-const handleLogout = () => {
-    logout();
-    navigate('/login');
-};
+import { useNavigate } from 'react-router-dom';
 
-const Navbar = ({ onLogout }) => (
-  <NavbarContainer>
-    <Logo>LooterBank Admin</Logo>
-    <NavLinks>
-      <NavLink>Users</NavLink>
-      <NavLink>Branches</NavLink>
-      <NavLink>Loan Review</NavLink>
-      <NavLink>Deposit Req</NavLink>
-      <NavLink onClick={handleLogout}>Logout</NavLink>
-    </NavLinks>
-  </NavbarContainer>
-);
+const Navbar = () => {
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    // In a real app, you would clear the auth token here
+    navigate('/login');
+  };
+
+  return (
+    <NavbarContainer>
+      <Logo>LooterBank Admin</Logo>
+      <NavLinks>
+        <NavLink>Users</NavLink>
+        <NavLink>Branches</NavLink>
+        <NavLink>Loan Review</NavLink>
+        <NavLink>Deposit Req</NavLink>
+        <NavLink onClick={handleLogout}>Logout</NavLink>
+      </NavLinks>
+    </NavbarContainer>
+  );
+};
 
 export default Navbar;
