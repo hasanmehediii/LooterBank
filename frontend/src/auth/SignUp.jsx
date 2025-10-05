@@ -139,7 +139,7 @@ const SignUp = () => {
 
         const body = JSON.stringify(newUser);
 
-        const res = await API.post('/auth/signup', body, config);
+                const res = await API.post('/api/auth/signup', body, config);
 
         localStorage.setItem('token', res.data.token);
         alert(`Sign up successful! Your new account number is: ${res.data.accountNumber}`);
