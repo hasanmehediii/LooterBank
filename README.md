@@ -6,9 +6,13 @@
   <strong>LooterBank – Unsafe your money most</strong>
 </p>
 
-LooterBank is a full-stack banking application built with Node.js, Express.js, MongoDB for the backend, and React.js for the frontend. It provides a secure and user-friendly platform for managing banking operations.
+LooterBank is a full-stack banking application built with Node.js, Express.js, MongoDB for the backend, and React.js for the frontend. It provides a secure and user-friendly platform for managing banking operations. It makes your banking activity easy from home. There is both website and mobile application for using this LooterBank in order to make everuthing easy. We offer more and more in a low cost.
 
-## Features
+## Website
+![Home Page](images/welcome.png)
+## App
+![Home Page](images/looter.jpg)
+
 
 ### Backend
 - User Authentication (Register, Login)
