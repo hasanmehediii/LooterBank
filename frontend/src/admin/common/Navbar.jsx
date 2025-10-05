@@ -50,6 +50,7 @@ const Navbar = () => {
         <NavLink onClick={() => navigate('/admin/dashboard')}>Dashboard</NavLink>
         <NavLink onClick={() => navigate('/admin/users')}>Users</NavLink>
         <NavLink onClick={() => navigate('/admin/transactions')}>Transactions</NavLink>
+        <NavLink onClick={() => navigate('/admin/loans')}>Manage Loans</NavLink>
         <NavLink onClick={() => navigate('/admin/settings')}>Settings</NavLink>
         <NavLink onClick={handleLogout}>Logout</NavLink>
       </NavLinks>

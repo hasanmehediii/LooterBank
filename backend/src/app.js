@@ -29,5 +29,6 @@ app.use('/api/admin/actions', require('./routes/adminRoutes'));
 app.use('/api/cards', require('./routes/cardRoutes'));
 app.use('/api/notifications', require('./routes/notificationRoutes'));
 app.use('/api/audit-logs', require('./routes/auditLogRoutes'));
+app.use('/api/loans', require('./routes/loanRoutes'));
 
 module.exports = app;

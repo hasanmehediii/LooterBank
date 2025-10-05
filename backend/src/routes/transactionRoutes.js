@@ -11,6 +11,6 @@ router.get('/', transactionController.getAllTransactions);
 // @route   GET api/transactions/my-transactions
 // @desc    Get user transactions
 // @access  Private
-router.get('/', authMiddleware, transactionController.getUserTransactions);
+router.get('/my-transactions', authMiddleware, transactionController.getUserTransactions);
 
 module.exports = router;

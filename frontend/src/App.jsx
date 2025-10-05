@@ -21,6 +21,7 @@ import ManageUser from './admin/activities/ManageUser';
 import AdminDashboard from './admin/activities/Dashboard';
 import AdminTransactions from './admin/activities/Transactions';
 import AdminSettings from './admin/activities/Settings';
+import ManageLoans from './admin/activities/ManageLoans';
 import './App.css';
 
 const AppContainer = styled.div`
@@ -74,6 +75,7 @@ function App() {
               <Route path="users" element={<ManageUser />} />
               <Route path="transactions" element={<AdminTransactions />} />
               <Route path="settings" element={<AdminSettings />} />
+              <Route path="loans" element={<ManageLoans />} />
             </Route>
             <Route path="*" element={<Navigate to="/" />} />
           </Routes>
